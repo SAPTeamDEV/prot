@@ -1,0 +1,264 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>9eb3f7dd-b2bf-4719-b7f9-93dac7ebe085</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>setup.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>prot</Name>
+    <RootNamespace>prot</RootNamespace>
+    <IsWindowsApplication>True</IsWindowsApplication>
+    <TestFramework>Pytest</TestFramework>
+    <InterpreterId>Global|VisualStudio|PyProtFramework 3.8</InterpreterId>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>!upgrade install sdist bdist_wheel clean</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="setup.py" />
+    <Compile Include="src\prot\bs\bs.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\prot\bs\bsPro.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\prot\bs\bsSpaz.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\prot\bs\bsMap.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\prot\bs\stdLib\__init__.py" />
+    <Compile Include="src\prot\code.py" />
+    <Compile Include="src\prot\color\ansi.py" />
+    <Compile Include="src\prot\color\ansitowin32.py" />
+    <Compile Include="src\prot\color\initialise.py" />
+    <Compile Include="src\prot\color\win32.py" />
+    <Compile Include="src\prot\color\winterm.py" />
+    <Compile Include="src\prot\color\__init__.py" />
+    <Compile Include="src\prot\bs\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\prot\__version__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\prot\pip\extra.py" />
+    <Compile Include="src\prot\pip\packagesList.py" />
+    <Compile Include="src\prot\pip\__init__.py" />
+    <Compile Include="src\prot\pip\__main__.py" />
+    <Compile Include="src\prot\progress\bar.py" />
+    <Compile Include="src\prot\progress\counter.py" />
+    <Compile Include="src\prot\progress\spinner.py" />
+    <Compile Include="src\prot\progress\__init__.py" />
+    <Compile Include="src\prot\prompt\application\application.py" />
+    <Compile Include="src\prot\prompt\application\current.py" />
+    <Compile Include="src\prot\prompt\application\dummy.py" />
+    <Compile Include="src\prot\prompt\application\run_in_terminal.py" />
+    <Compile Include="src\prot\prompt\application\__init__.py" />
+    <Compile Include="src\prot\prompt\auto_suggest.py" />
+    <Compile Include="src\prot\prompt\buffer.py" />
+    <Compile Include="src\prot\prompt\cache.py" />
+    <Compile Include="src\prot\prompt\clipboard\base.py" />
+    <Compile Include="src\prot\prompt\clipboard\in_memory.py" />
+    <Compile Include="src\prot\prompt\clipboard\pyperclip.py" />
+    <Compile Include="src\prot\prompt\clipboard\__init__.py" />
+    <Compile Include="src\prot\prompt\completion\base.py" />
+    <Compile Include="src\prot\prompt\completion\filesystem.py" />
+    <Compile Include="src\prot\prompt\completion\fuzzy_completer.py" />
+    <Compile Include="src\prot\prompt\completion\nested.py" />
+    <Compile Include="src\prot\prompt\completion\word_completer.py" />
+    <Compile Include="src\prot\prompt\completion\__init__.py" />
+    <Compile Include="src\prot\prompt\contrib\completers\system.py" />
+    <Compile Include="src\prot\prompt\contrib\completers\__init__.py" />
+    <Compile Include="src\prot\prompt\contrib\regular_languages\compiler.py" />
+    <Compile Include="src\prot\prompt\contrib\regular_languages\completion.py" />
+    <Compile Include="src\prot\prompt\contrib\regular_languages\lexer.py" />
+    <Compile Include="src\prot\prompt\contrib\regular_languages\regex_parser.py" />
+    <Compile Include="src\prot\prompt\contrib\regular_languages\validation.py" />
+    <Compile Include="src\prot\prompt\contrib\regular_languages\__init__.py" />
+    <Compile Include="src\prot\prompt\contrib\ssh\server.py" />
+    <Compile Include="src\prot\prompt\contrib\ssh\__init__.py" />
+    <Compile Include="src\prot\prompt\contrib\telnet\log.py" />
+    <Compile Include="src\prot\prompt\contrib\telnet\protocol.py" />
+    <Compile Include="src\prot\prompt\contrib\telnet\server.py" />
+    <Compile Include="src\prot\prompt\contrib\telnet\__init__.py" />
+    <Compile Include="src\prot\prompt\contrib\__init__.py" />
+    <Compile Include="src\prot\prompt\data_structures.py" />
+    <Compile Include="src\prot\prompt\document.py" />
+    <Compile Include="src\prot\prompt\enums.py" />
+    <Compile Include="src\prot\prompt\eventloop\async_context_manager.py" />
+    <Compile Include="src\prot\prompt\eventloop\async_generator.py" />
+    <Compile Include="src\prot\prompt\eventloop\dummy_contextvars.py" />
+    <Compile Include="src\prot\prompt\eventloop\inputhook.py" />
+    <Compile Include="src\prot\prompt\eventloop\utils.py" />
+    <Compile Include="src\prot\prompt\eventloop\win32.py" />
+    <Compile Include="src\prot\prompt\eventloop\__init__.py" />
+    <Compile Include="src\prot\prompt\filters\app.py" />
+    <Compile Include="src\prot\prompt\filters\base.py" />
+    <Compile Include="src\prot\prompt\filters\cli.py" />
+    <Compile Include="src\prot\prompt\filters\utils.py" />
+    <Compile Include="src\prot\prompt\filters\__init__.py" />
+    <Compile Include="src\prot\prompt\formatted_text\ansi.py" />
+    <Compile Include="src\prot\prompt\formatted_text\base.py" />
+    <Compile Include="src\prot\prompt\formatted_text\html.py" />
+    <Compile Include="src\prot\prompt\formatted_text\pygments.py" />
+    <Compile Include="src\prot\prompt\formatted_text\utils.py" />
+    <Compile Include="src\prot\prompt\formatted_text\__init__.py" />
+    <Compile Include="src\prot\prompt\history.py" />
+    <Compile Include="src\prot\prompt\input\ansi_escape_sequences.py" />
+    <Compile Include="src\prot\prompt\input\base.py" />
+    <Compile Include="src\prot\prompt\input\defaults.py" />
+    <Compile Include="src\prot\prompt\input\posix_pipe.py" />
+    <Compile Include="src\prot\prompt\input\posix_utils.py" />
+    <Compile Include="src\prot\prompt\input\typeahead.py" />
+    <Compile Include="src\prot\prompt\input\vt100.py" />
+    <Compile Include="src\prot\prompt\input\vt100_parser.py" />
+    <Compile Include="src\prot\prompt\input\win32.py" />
+    <Compile Include="src\prot\prompt\input\win32_pipe.py" />
+    <Compile Include="src\prot\prompt\input\__init__.py" />
+    <Compile Include="src\prot\prompt\keys.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\auto_suggest.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\basic.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\completion.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\cpr.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\emacs.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\focus.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\mouse.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\named_commands.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\open_in_editor.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\page_navigation.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\scroll.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\search.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\vi.py" />
+    <Compile Include="src\prot\prompt\key_binding\bindings\__init__.py" />
+    <Compile Include="src\prot\prompt\key_binding\defaults.py" />
+    <Compile Include="src\prot\prompt\key_binding\digraphs.py" />
+    <Compile Include="src\prot\prompt\key_binding\emacs_state.py" />
+    <Compile Include="src\prot\prompt\key_binding\key_bindings.py" />
+    <Compile Include="src\prot\prompt\key_binding\key_processor.py" />
+    <Compile Include="src\prot\prompt\key_binding\vi_state.py" />
+    <Compile Include="src\prot\prompt\key_binding\__init__.py" />
+    <Compile Include="src\prot\prompt\layout\containers.py" />
+    <Compile Include="src\prot\prompt\layout\controls.py" />
+    <Compile Include="src\prot\prompt\layout\dimension.py" />
+    <Compile Include="src\prot\prompt\layout\dummy.py" />
+    <Compile Include="src\prot\prompt\layout\layout.py" />
+    <Compile Include="src\prot\prompt\layout\margins.py" />
+    <Compile Include="src\prot\prompt\layout\menus.py" />
+    <Compile Include="src\prot\prompt\layout\mouse_handlers.py" />
+    <Compile Include="src\prot\prompt\layout\processors.py" />
+    <Compile Include="src\prot\prompt\layout\screen.py" />
+    <Compile Include="src\prot\prompt\layout\utils.py" />
+    <Compile Include="src\prot\prompt\layout\__init__.py" />
+    <Compile Include="src\prot\prompt\lexers\base.py" />
+    <Compile Include="src\prot\prompt\lexers\pygments.py" />
+    <Compile Include="src\prot\prompt\lexers\__init__.py" />
+    <Compile Include="src\prot\prompt\log.py" />
+    <Compile Include="src\prot\prompt\mouse_events.py" />
+    <Compile Include="src\prot\prompt\output\base.py" />
+    <Compile Include="src\prot\prompt\output\color_depth.py" />
+    <Compile Include="src\prot\prompt\output\conemu.py" />
+    <Compile Include="src\prot\prompt\output\defaults.py" />
+    <Compile Include="src\prot\prompt\output\vt100.py" />
+    <Compile Include="src\prot\prompt\output\win32.py" />
+    <Compile Include="src\prot\prompt\output\windows10.py" />
+    <Compile Include="src\prot\prompt\output\__init__.py" />
+    <Compile Include="src\prot\prompt\patch_stdout.py" />
+    <Compile Include="src\prot\prompt\renderer.py" />
+    <Compile Include="src\prot\prompt\search.py" />
+    <Compile Include="src\prot\prompt\selection.py" />
+    <Compile Include="src\prot\prompt\shortcuts\dialogs.py" />
+    <Compile Include="src\prot\prompt\shortcuts\progress_bar\base.py" />
+    <Compile Include="src\prot\prompt\shortcuts\progress_bar\formatters.py" />
+    <Compile Include="src\prot\prompt\shortcuts\progress_bar\__init__.py" />
+    <Compile Include="src\prot\prompt\shortcuts\prompt.py" />
+    <Compile Include="src\prot\prompt\shortcuts\utils.py" />
+    <Compile Include="src\prot\prompt\shortcuts\__init__.py" />
+    <Compile Include="src\prot\prompt\styles\base.py" />
+    <Compile Include="src\prot\prompt\styles\defaults.py" />
+    <Compile Include="src\prot\prompt\styles\named_colors.py" />
+    <Compile Include="src\prot\prompt\styles\pygments.py" />
+    <Compile Include="src\prot\prompt\styles\style.py" />
+    <Compile Include="src\prot\prompt\styles\style_transformation.py" />
+    <Compile Include="src\prot\prompt\styles\__init__.py" />
+    <Compile Include="src\prot\prompt\token.py" />
+    <Compile Include="src\prot\prompt\utils.py" />
+    <Compile Include="src\prot\prompt\validation.py" />
+    <Compile Include="src\prot\prompt\widgets\base.py" />
+    <Compile Include="src\prot\prompt\widgets\dialogs.py" />
+    <Compile Include="src\prot\prompt\widgets\menus.py" />
+    <Compile Include="src\prot\prompt\widgets\toolbars.py" />
+    <Compile Include="src\prot\prompt\widgets\__init__.py" />
+    <Compile Include="src\prot\prompt\win32_types.py" />
+    <Compile Include="src\prot\prompt\__init__.py" />
+    <Compile Include="src\prot\wcwidth\table_wide.py" />
+    <Compile Include="src\prot\wcwidth\table_zero.py" />
+    <Compile Include="src\prot\wcwidth\tests\test_core.py" />
+    <Compile Include="src\prot\wcwidth\tests\__init__.py" />
+    <Compile Include="src\prot\wcwidth\wcwidth.py" />
+    <Compile Include="src\prot\wcwidth\__init__.py" />
+    <Compile Include="src\prot\__init__.py" />
+    <Compile Include="src\prot\__main__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="src\prot\" />
+    <Folder Include="src\prot\bs\stdLib\" />
+    <Folder Include="src\prot\color\" />
+    <Folder Include="src\prot\bs\" />
+    <Folder Include="src\prot\pip\" />
+    <Folder Include="src\prot\progress\" />
+    <Folder Include="src\prot\prompt\" />
+    <Folder Include="src\prot\prompt\application\" />
+    <Folder Include="src\prot\prompt\clipboard\" />
+    <Folder Include="src\prot\prompt\completion\" />
+    <Folder Include="src\prot\prompt\contrib\" />
+    <Folder Include="src\prot\prompt\contrib\completers\" />
+    <Folder Include="src\prot\prompt\contrib\regular_languages\" />
+    <Folder Include="src\prot\prompt\contrib\ssh\" />
+    <Folder Include="src\prot\prompt\contrib\telnet\" />
+    <Folder Include="src\prot\prompt\eventloop\" />
+    <Folder Include="src\prot\prompt\filters\" />
+    <Folder Include="src\prot\prompt\formatted_text\" />
+    <Folder Include="src\prot\prompt\input\" />
+    <Folder Include="src\prot\prompt\key_binding\" />
+    <Folder Include="src\prot\prompt\key_binding\bindings\" />
+    <Folder Include="src\prot\prompt\layout\" />
+    <Folder Include="src\prot\prompt\lexers\" />
+    <Folder Include="src\prot\prompt\output\" />
+    <Folder Include="src\prot\prompt\shortcuts\" />
+    <Folder Include="src\prot\prompt\shortcuts\progress_bar\" />
+    <Folder Include="src\prot\prompt\styles\" />
+    <Folder Include="src\prot\prompt\widgets\" />
+    <Folder Include="src\prot\wcwidth\" />
+    <Folder Include="src\prot\wcwidth\tests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MANIFEST.in" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|VisualStudio|PyProtFramework 3.8" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

@@ -1,0 +1,119 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>eabf6528-99b6-493f-8b11-f05fd6d2f299</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>stdLib</Name>
+    <RootNamespace>stdLib</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="alwaysLandLevelDefs.py" />
+    <Compile Include="bigGDefs.py" />
+    <Compile Include="bridgitLevelDefs.py" />
+    <Compile Include="bs.py" />
+    <Compile Include="bsAchievement.py" />
+    <Compile Include="bsAssault.py" />
+    <Compile Include="bsBomb.py" />
+    <Compile Include="bsCaptureTheFlag.py" />
+    <Compile Include="bsChosenOne.py" />
+    <Compile Include="bsConquest.py" />
+    <Compile Include="bsCoopGame.py" />
+    <Compile Include="bsDeathMatch.py" />
+    <Compile Include="bsEasterEggHunt.py" />
+    <Compile Include="bsElimination.py" />
+    <Compile Include="bsFlag.py" />
+    <Compile Include="bsFootball.py" />
+    <Compile Include="bsGame.py" />
+    <Compile Include="bsHockey.py" />
+    <Compile Include="bsInternal.py" />
+    <Compile Include="bsKeepAway.py" />
+    <Compile Include="bsKingOfTheHill.py" />
+    <Compile Include="bsLanguageArabic.py" />
+    <Compile Include="bsLanguageBelarussian.py" />
+    <Compile Include="bsLanguageChinese.py" />
+    <Compile Include="bsLanguageCroatian.py" />
+    <Compile Include="bsLanguageCzech.py" />
+    <Compile Include="bsLanguageDanish.py" />
+    <Compile Include="bsLanguageDutch.py" />
+    <Compile Include="bsLanguageEnglish.py" />
+    <Compile Include="bsLanguageEsperanto.py" />
+    <Compile Include="bsLanguageFrench.py" />
+    <Compile Include="bsLanguageGerman.py" />
+    <Compile Include="bsLanguageGibberish.py" />
+    <Compile Include="bsLanguageGreek.py" />
+    <Compile Include="bsLanguageHindi.py" />
+    <Compile Include="bsLanguageHungarian.py" />
+    <Compile Include="bsLanguageIndonesian.py" />
+    <Compile Include="bsLanguageItalian.py" />
+    <Compile Include="bsLanguageKorean.py" />
+    <Compile Include="bsLanguagePersian.py" />
+    <Compile Include="bsLanguagePolish.py" />
+    <Compile Include="bsLanguagePortuguese.py" />
+    <Compile Include="bsLanguageRomanian.py" />
+    <Compile Include="bsLanguageRussian.py" />
+    <Compile Include="bsLanguageSerbian.py" />
+    <Compile Include="bsLanguageSpanish.py" />
+    <Compile Include="bsLanguageSwedish.py" />
+    <Compile Include="bsLanguageTurkish.py" />
+    <Compile Include="bsLanguageUkrainian.py" />
+    <Compile Include="bsLobby.py" />
+    <Compile Include="bsMainMenu.py" />
+    <Compile Include="bsMap.py" />
+    <Compile Include="bsMeteorShower.py" />
+    <Compile Include="bsNinjaFight.py" />
+    <Compile Include="bsOnslaught.py" />
+    <Compile Include="bsPowerup.py" />
+    <Compile Include="bsRace.py" />
+    <Compile Include="bsRunaround.py" />
+    <Compile Include="bsScoreBoard.py" />
+    <Compile Include="bsScoreSet.py" />
+    <Compile Include="bsServerData.py" />
+    <Compile Include="bsSpaz.py" />
+    <Compile Include="bsTargetPractice.py" />
+    <Compile Include="bsTeamGame.py" />
+    <Compile Include="bsTheLastStand.py" />
+    <Compile Include="bsTutorial.py" />
+    <Compile Include="bsUI.py" />
+    <Compile Include="bsUI2.py" />
+    <Compile Include="bsUtils.py" />
+    <Compile Include="bsVector.py" />
+    <Compile Include="courtyardLevelDefs.py" />
+    <Compile Include="cragCastleDefs.py" />
+    <Compile Include="doomShroomLevelDefs.py" />
+    <Compile Include="footballStadiumDefs.py" />
+    <Compile Include="hockeyStadiumDefs.py" />
+    <Compile Include="lakeFrigidDefs.py" />
+    <Compile Include="monkeyFaceLevelDefs.py" />
+    <Compile Include="rampageLevelDefs.py" />
+    <Compile Include="roundaboutLevelDefs.py" />
+    <Compile Include="stepRightUpLevelDefs.py" />
+    <Compile Include="thePadLevelDefs.py" />
+    <Compile Include="tipTopLevelDefs.py" />
+    <Compile Include="towerDLevelDefs.py" />
+    <Compile Include="zigZagLevelDefs.py" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
