@@ -1,4 +1,8 @@
 Prot - Pro Tools for Python 3
+
+[![Downloads](https://static.pepy.tech/badge/prot)](https://pepy.tech/project/prot)
+
+
 =============================
 
 Modules
