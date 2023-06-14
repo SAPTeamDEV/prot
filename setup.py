@@ -12,7 +12,7 @@ if '!upgrade' in sys.argv:
 
 setup(
 	name="prot", version=ver, description='A Simple Tool That Contains Advance Functions.',
-	long_description=open('../README.md').read(), long_description_content_type='text/markdown',
+	long_description=open('README.md').read(), long_description_content_type='text/markdown',
 	author="Alireza Poodineh", author_email='itsaeliux@gmail.com', url='https://github.com/SAPTeamDEV/prot',
-	packages=find_packages(where="src"),license_files = ('../LICENSE',), package_dir={"": "src"}, zip_safe=False,
+	packages=find_packages(where="src"), license_files=('LICENSE',), package_dir={"": "src"}, license="MIT",
 	entry_points={"console_scripts": ["prot=prot:prot", "prot.pip=prot.pip:pip"]})
