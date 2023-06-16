@@ -7,12 +7,8 @@ import time
 from abc import ABCMeta, abstractmethod
 from typing import TYPE_CHECKING, List, Tuple
 
-from prot.prompt.formatted_text import (
-    HTML,
-    AnyFormattedText,
-    StyleAndTextTuples,
-    to_formatted_text,
-)
+from prot.prompt.formatted_text import (HTML, AnyFormattedText,
+                                        StyleAndTextTuples, to_formatted_text)
 from prot.prompt.formatted_text.utils import fragment_list_width
 from prot.prompt.layout.dimension import AnyDimension, D
 from prot.prompt.layout.utils import explode_text_fragments

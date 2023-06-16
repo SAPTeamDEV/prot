@@ -4,66 +4,37 @@ import re
 import signal
 import sys
 import time
-from prot import printMsg
-from asyncio import (
-    AbstractEventLoop,
-    CancelledError,
-    Future,
-    Task,
-    ensure_future,
-    get_event_loop,
-    new_event_loop,
-    set_event_loop,
-    sleep,
-)
+from asyncio import (AbstractEventLoop, CancelledError, Future, Task,
+                     ensure_future, get_event_loop, new_event_loop,
+                     set_event_loop, sleep)
 from subprocess import Popen
 from traceback import format_tb
-from typing import (
-    Any,
-    Awaitable,
-    Callable,
-    Dict,
-    FrozenSet,
-    Generic,
-    Hashable,
-    Iterable,
-    List,
-    Optional,
-    Tuple,
-    Type,
-    TypeVar,
-    Union,
-    cast,
-    overload,
-)
+from typing import (Any, Awaitable, Callable, Dict, FrozenSet, Generic,
+                    Hashable, Iterable, List, Optional, Tuple, Type, TypeVar,
+                    Union, cast, overload)
 
+from prot import printMsg
 from prot.prompt.buffer import Buffer
 from prot.prompt.cache import SimpleCache
 from prot.prompt.clipboard import Clipboard, InMemoryClipboard
 from prot.prompt.enums import EditingMode
-from prot.prompt.eventloop import (
-    get_traceback_from_context,
-    run_in_executor_with_context,
-)
+from prot.prompt.eventloop import (get_traceback_from_context,
+                                   run_in_executor_with_context)
 from prot.prompt.eventloop.utils import call_soon_threadsafe
 from prot.prompt.filters import Condition, Filter, FilterOrBool, to_filter
 from prot.prompt.formatted_text import AnyFormattedText
 from prot.prompt.input.base import Input
 from prot.prompt.input.typeahead import get_typeahead, store_typeahead
-from prot.prompt.key_binding.bindings.page_navigation import (
-    load_page_navigation_bindings,
-)
+from prot.prompt.key_binding.bindings.page_navigation import \
+    load_page_navigation_bindings
 from prot.prompt.key_binding.defaults import load_key_bindings
 from prot.prompt.key_binding.emacs_state import EmacsState
-from prot.prompt.key_binding.key_bindings import (
-    Binding,
-    ConditionalKeyBindings,
-    GlobalOnlyKeyBindings,
-    KeyBindings,
-    KeyBindingsBase,
-    KeysTuple,
-    merge_key_bindings,
-)
+from prot.prompt.key_binding.key_bindings import (Binding,
+                                                  ConditionalKeyBindings,
+                                                  GlobalOnlyKeyBindings,
+                                                  KeyBindings, KeyBindingsBase,
+                                                  KeysTuple,
+                                                  merge_key_bindings)
 from prot.prompt.key_binding.key_processor import KeyPressEvent, KeyProcessor
 from prot.prompt.key_binding.vi_state import ViState
 from prot.prompt.keys import Keys
@@ -74,16 +45,10 @@ from prot.prompt.layout.layout import Layout, walk
 from prot.prompt.output import ColorDepth, Output
 from prot.prompt.renderer import Renderer, print_formatted_text
 from prot.prompt.search import SearchState
-from prot.prompt.styles import (
-    BaseStyle,
-    DummyStyle,
-    DummyStyleTransformation,
-    DynamicStyle,
-    StyleTransformation,
-    default_pygments_style,
-    default_ui_style,
-    merge_styles,
-)
+from prot.prompt.styles import (BaseStyle, DummyStyle,
+                                DummyStyleTransformation, DynamicStyle,
+                                StyleTransformation, default_pygments_style,
+                                default_ui_style, merge_styles)
 from prot.prompt.utils import Event, in_main_thread
 
 from .current import get_app_session, set_app

@@ -7,12 +7,8 @@ from prot.prompt.filters import has_completions, has_focus
 from prot.prompt.formatted_text import AnyFormattedText
 from prot.prompt.key_binding.bindings.focus import focus_next, focus_previous
 from prot.prompt.key_binding.key_bindings import KeyBindings
-from prot.prompt.layout.containers import (
-    AnyContainer,
-    DynamicContainer,
-    HSplit,
-    VSplit,
-)
+from prot.prompt.layout.containers import (AnyContainer, DynamicContainer,
+                                           HSplit, VSplit)
 from prot.prompt.layout.dimension import AnyDimension
 from prot.prompt.layout.dimension import Dimension as D
 

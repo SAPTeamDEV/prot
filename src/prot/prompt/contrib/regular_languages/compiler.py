@@ -43,17 +43,8 @@ from typing import Callable, Dict, Iterable, Iterator, List
 from typing import Match as RegexMatch
 from typing import Optional, Pattern, Tuple, cast
 
-from .regex_parser import (
-    AnyNode,
-    Lookahead,
-    Node,
-    NodeSequence,
-    Regex,
-    Repeat,
-    Variable,
-    parse_regex,
-    tokenize_regex,
-)
+from .regex_parser import (AnyNode, Lookahead, Node, NodeSequence, Regex,
+                           Repeat, Variable, parse_regex, tokenize_regex)
 
 __all__ = [
     "compile",

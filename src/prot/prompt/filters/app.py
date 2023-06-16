@@ -52,9 +52,9 @@ def has_focus(value: "FocusableElement") -> Condition:
     Enable when this buffer has the focus.
     """
     from prot.prompt.buffer import Buffer
-    from prot.prompt.layout.controls import UIControl
-    from prot.prompt.layout.containers import to_container, Window, Container
     from prot.prompt.layout import walk
+    from prot.prompt.layout.containers import Container, Window, to_container
+    from prot.prompt.layout.controls import UIControl
 
     if isinstance(value, str):
 

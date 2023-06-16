@@ -1,6 +1,7 @@
 from typing import Optional
 
 import pyperclip
+
 from prot.prompt.selection import SelectionType
 
 from .base import Clipboard, ClipboardData

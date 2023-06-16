@@ -5,11 +5,9 @@ from abc import ABCMeta, abstractmethod
 from typing import TYPE_CHECKING, Callable, Optional
 
 from prot.prompt.filters import FilterOrBool, to_filter
-from prot.prompt.formatted_text import (
-    StyleAndTextTuples,
-    fragment_list_to_text,
-    to_formatted_text,
-)
+from prot.prompt.formatted_text import (StyleAndTextTuples,
+                                        fragment_list_to_text,
+                                        to_formatted_text)
 from prot.prompt.utils import get_cwidth
 
 from .controls import UIContent

@@ -2,11 +2,8 @@ import sys
 from typing import Optional, TextIO, cast
 
 from prot.prompt.patch_stdout import StdoutProxy
-from prot.prompt.utils import (
-    get_term_environment_variable,
-    is_conemu_ansi,
-    is_windows,
-)
+from prot.prompt.utils import (get_term_environment_variable, is_conemu_ansi,
+                               is_windows)
 
 from .base import Output
 
@@ -48,7 +45,7 @@ def create_output(
     if is_windows():
         from .conemu import ConEmuOutput
         from .win32 import Win32Output
-        from .windows10 import is_win_vt100_enabled, Windows10_Output
+        from .windows10 import Windows10_Output, is_win_vt100_enabled
 
         if is_win_vt100_enabled():
             return cast(Output, Windows10_Output(stdout))

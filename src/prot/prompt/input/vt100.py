@@ -5,18 +5,8 @@ import sys
 import termios
 import tty
 from asyncio import AbstractEventLoop, get_event_loop
-from typing import (
-    Callable,
-    ContextManager,
-    Dict,
-    Generator,
-    List,
-    Optional,
-    Set,
-    TextIO,
-    Tuple,
-    Union,
-)
+from typing import (Callable, ContextManager, Dict, Generator, List, Optional,
+                    Set, TextIO, Tuple, Union)
 
 from prot.prompt.utils import is_dumb_terminal
 

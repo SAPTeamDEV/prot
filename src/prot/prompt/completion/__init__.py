@@ -1,13 +1,6 @@
-from .base import (
-    CompleteEvent,
-    Completer,
-    Completion,
-    DummyCompleter,
-    DynamicCompleter,
-    ThreadedCompleter,
-    get_common_complete_suffix,
-    merge_completers,
-)
+from .base import (CompleteEvent, Completer, Completion, DummyCompleter,
+                   DynamicCompleter, ThreadedCompleter,
+                   get_common_complete_suffix, merge_completers)
 from .filesystem import ExecutableCompleter, PathCompleter
 from .fuzzy_completer import FuzzyCompleter, FuzzyWordCompleter
 from .nested import NestedCompleter

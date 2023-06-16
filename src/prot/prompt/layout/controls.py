@@ -3,17 +3,8 @@ User interface Controls for the layout.
 """
 import time
 from abc import ABCMeta, abstractmethod
-from typing import (
-    TYPE_CHECKING,
-    Callable,
-    Dict,
-    Hashable,
-    Iterable,
-    List,
-    NamedTuple,
-    Optional,
-    Union,
-)
+from typing import (TYPE_CHECKING, Callable, Dict, Hashable, Iterable, List,
+                    NamedTuple, Optional, Union)
 
 from prot.prompt.application.current import get_app
 from prot.prompt.buffer import Buffer
@@ -21,31 +12,20 @@ from prot.prompt.cache import SimpleCache
 from prot.prompt.data_structures import Point
 from prot.prompt.document import Document
 from prot.prompt.filters import FilterOrBool, to_filter
-from prot.prompt.formatted_text import (
-    AnyFormattedText,
-    StyleAndTextTuples,
-    to_formatted_text,
-)
-from prot.prompt.formatted_text.utils import (
-    fragment_list_to_text,
-    fragment_list_width,
-    split_lines,
-)
+from prot.prompt.formatted_text import (AnyFormattedText, StyleAndTextTuples,
+                                        to_formatted_text)
+from prot.prompt.formatted_text.utils import (fragment_list_to_text,
+                                              fragment_list_width, split_lines)
 from prot.prompt.lexers import Lexer, SimpleLexer
 from prot.prompt.mouse_events import MouseEvent, MouseEventType
 from prot.prompt.search import SearchState
 from prot.prompt.selection import SelectionType
 from prot.prompt.utils import get_cwidth
 
-from .processors import (
-    DisplayMultipleCursors,
-    HighlightIncrementalSearchProcessor,
-    HighlightSearchProcessor,
-    HighlightSelectionProcessor,
-    Processor,
-    TransformationInput,
-    merge_processors,
-)
+from .processors import (DisplayMultipleCursors,
+                         HighlightIncrementalSearchProcessor,
+                         HighlightSearchProcessor, HighlightSelectionProcessor,
+                         Processor, TransformationInput, merge_processors)
 
 if TYPE_CHECKING:
     from prot.prompt.key_binding.key_bindings import KeyBindingsBase

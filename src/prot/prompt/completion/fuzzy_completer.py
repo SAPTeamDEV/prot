@@ -1,5 +1,6 @@
 import re
-from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Tuple, Union
+from typing import (Callable, Dict, Iterable, List, NamedTuple, Optional,
+                    Tuple, Union)
 
 from prot.prompt.document import Document
 from prot.prompt.filters import FilterOrBool, to_filter

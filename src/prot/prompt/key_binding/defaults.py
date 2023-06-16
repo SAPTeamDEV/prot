@@ -8,20 +8,14 @@ from prot.prompt.filters import buffer_has_focus
 from prot.prompt.key_binding.bindings.basic import load_basic_bindings
 from prot.prompt.key_binding.bindings.cpr import load_cpr_bindings
 from prot.prompt.key_binding.bindings.emacs import (
-    load_emacs_bindings,
-    load_emacs_search_bindings,
-    load_emacs_shift_selection_bindings,
-)
+    load_emacs_bindings, load_emacs_search_bindings,
+    load_emacs_shift_selection_bindings)
 from prot.prompt.key_binding.bindings.mouse import load_mouse_bindings
-from prot.prompt.key_binding.bindings.vi import (
-    load_vi_bindings,
-    load_vi_search_bindings,
-)
-from prot.prompt.key_binding.key_bindings import (
-    ConditionalKeyBindings,
-    KeyBindingsBase,
-    merge_key_bindings,
-)
+from prot.prompt.key_binding.bindings.vi import (load_vi_bindings,
+                                                 load_vi_search_bindings)
+from prot.prompt.key_binding.key_bindings import (ConditionalKeyBindings,
+                                                  KeyBindingsBase,
+                                                  merge_key_bindings)
 
 __all__ = [
     "load_key_bindings",

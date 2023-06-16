@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING, Callable, Dict, Optional
 from prot.prompt.clipboard import ClipboardData
 
 if TYPE_CHECKING:
-    from .key_processor import KeyPressEvent
     from .bindings.vi import TextObject
+    from .key_processor import KeyPressEvent
 
 __all__ = [
     "InputMode",

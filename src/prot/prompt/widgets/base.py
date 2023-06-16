@@ -13,60 +13,36 @@ container object.
     `prompt_toolkit.shortcuts.dialogs` on the other hand is considered stable.
 """
 from functools import partial
-from typing import Callable, Generic, List, Optional, Sequence, Tuple, TypeVar, Union
+from typing import (Callable, Generic, List, Optional, Sequence, Tuple,
+                    TypeVar, Union)
 
 from prot.prompt.application.current import get_app
 from prot.prompt.auto_suggest import AutoSuggest, DynamicAutoSuggest
 from prot.prompt.buffer import Buffer, BufferAcceptHandler
 from prot.prompt.completion import Completer, DynamicCompleter
 from prot.prompt.document import Document
-from prot.prompt.filters import (
-    Condition,
-    FilterOrBool,
-    has_focus,
-    is_done,
-    is_true,
-    to_filter,
-)
-from prot.prompt.formatted_text import (
-    AnyFormattedText,
-    StyleAndTextTuples,
-    Template,
-    to_formatted_text,
-)
+from prot.prompt.filters import (Condition, FilterOrBool, has_focus, is_done,
+                                 is_true, to_filter)
+from prot.prompt.formatted_text import (AnyFormattedText, StyleAndTextTuples,
+                                        Template, to_formatted_text)
 from prot.prompt.formatted_text.utils import fragment_list_to_text
 from prot.prompt.history import History
 from prot.prompt.key_binding.key_bindings import KeyBindings
 from prot.prompt.key_binding.key_processor import KeyPressEvent
 from prot.prompt.keys import Keys
-from prot.prompt.layout.containers import (
-    AnyContainer,
-    ConditionalContainer,
-    Container,
-    DynamicContainer,
-    Float,
-    FloatContainer,
-    HSplit,
-    VSplit,
-    Window,
-    WindowAlign,
-)
-from prot.prompt.layout.controls import (
-    BufferControl,
-    FormattedTextControl,
-    GetLinePrefixCallable,
-)
+from prot.prompt.layout.containers import (AnyContainer, ConditionalContainer,
+                                           Container, DynamicContainer, Float,
+                                           FloatContainer, HSplit, VSplit,
+                                           Window, WindowAlign)
+from prot.prompt.layout.controls import (BufferControl, FormattedTextControl,
+                                         GetLinePrefixCallable)
 from prot.prompt.layout.dimension import AnyDimension
 from prot.prompt.layout.dimension import Dimension as D
 from prot.prompt.layout.dimension import to_dimension
 from prot.prompt.layout.margins import NumberedMargin, ScrollbarMargin
-from prot.prompt.layout.processors import (
-    AppendAutoSuggestion,
-    BeforeInput,
-    ConditionalProcessor,
-    PasswordProcessor,
-    Processor,
-)
+from prot.prompt.layout.processors import (AppendAutoSuggestion, BeforeInput,
+                                           ConditionalProcessor,
+                                           PasswordProcessor, Processor)
 from prot.prompt.lexers import DynamicLexer, Lexer
 from prot.prompt.mouse_events import MouseEvent, MouseEventType
 from prot.prompt.utils import get_cwidth

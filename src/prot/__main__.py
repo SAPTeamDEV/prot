@@ -1,7 +1,9 @@
+import sys
+
+import prot
+
 from . import *
 from . import __version__ as version
-import prot
-import sys
 
 exit = False
 if "light" in status:

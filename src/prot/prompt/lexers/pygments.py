@@ -6,16 +6,8 @@ lexing at the beginning of a document, when displaying a very large text.
 """
 import re
 from abc import ABCMeta, abstractmethod
-from typing import (
-    TYPE_CHECKING,
-    Callable,
-    Dict,
-    Generator,
-    Iterable,
-    Optional,
-    Tuple,
-    Type,
-)
+from typing import (TYPE_CHECKING, Callable, Dict, Generator, Iterable,
+                    Optional, Tuple, Type)
 
 from prot.prompt.document import Document
 from prot.prompt.filters import FilterOrBool, to_filter
@@ -210,8 +202,8 @@ class PygmentsLexer(Lexer):
         Create a `Lexer` from a filename.
         """
         # Inline imports: the Pygments dependency is optional!
-        from pygments.util import ClassNotFound
         from pygments.lexers import get_lexer_for_filename
+        from pygments.util import ClassNotFound
 
         try:
             pygments_lexer = get_lexer_for_filename(filename)

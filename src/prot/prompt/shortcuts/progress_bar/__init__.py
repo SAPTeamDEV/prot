@@ -1,17 +1,7 @@
 from .base import ProgressBar
-from .formatters import (
-    Bar,
-    Formatter,
-    IterationsPerSecond,
-    Label,
-    Percentage,
-    Progress,
-    Rainbow,
-    SpinningWheel,
-    Text,
-    TimeElapsed,
-    TimeLeft,
-)
+from .formatters import (Bar, Formatter, IterationsPerSecond, Label,
+                         Percentage, Progress, Rainbow, SpinningWheel, Text,
+                         TimeElapsed, TimeLeft)
 
 __all__ = [
     "ProgressBar",

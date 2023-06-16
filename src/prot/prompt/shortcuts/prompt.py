@@ -27,107 +27,70 @@ Example::
 from asyncio import get_event_loop
 from enum import Enum
 from functools import partial
-from typing import (
-    TYPE_CHECKING,
-    Callable,
-    Generic,
-    List,
-    Optional,
-    Tuple,
-    TypeVar,
-    Union,
-    cast,
-)
+from typing import (TYPE_CHECKING, Callable, Generic, List, Optional, Tuple,
+                    TypeVar, Union, cast)
 
 from prot.prompt.application import Application
 from prot.prompt.application.current import get_app
 from prot.prompt.auto_suggest import AutoSuggest, DynamicAutoSuggest
 from prot.prompt.buffer import Buffer
-from prot.prompt.clipboard import Clipboard, DynamicClipboard, InMemoryClipboard
-from prot.prompt.completion import Completer, DynamicCompleter, ThreadedCompleter
+from prot.prompt.clipboard import (Clipboard, DynamicClipboard,
+                                   InMemoryClipboard)
+from prot.prompt.completion import (Completer, DynamicCompleter,
+                                    ThreadedCompleter)
 from prot.prompt.document import Document
 from prot.prompt.enums import DEFAULT_BUFFER, SEARCH_BUFFER, EditingMode
-from prot.prompt.filters import (
-    Condition,
-    FilterOrBool,
-    has_arg,
-    has_focus,
-    is_done,
-    is_true,
-    renderer_height_is_known,
-    to_filter,
-)
-from prot.prompt.formatted_text import (
-    AnyFormattedText,
-    StyleAndTextTuples,
-    fragment_list_to_text,
-    merge_formatted_text,
-    to_formatted_text,
-)
+from prot.prompt.filters import (Condition, FilterOrBool, has_arg, has_focus,
+                                 is_done, is_true, renderer_height_is_known,
+                                 to_filter)
+from prot.prompt.formatted_text import (AnyFormattedText, StyleAndTextTuples,
+                                        fragment_list_to_text,
+                                        merge_formatted_text,
+                                        to_formatted_text)
 from prot.prompt.history import History, InMemoryHistory
 from prot.prompt.input.base import Input
-from prot.prompt.key_binding.bindings.auto_suggest import load_auto_suggest_bindings
-from prot.prompt.key_binding.bindings.completion import (
-    display_completions_like_readline,
-)
-from prot.prompt.key_binding.bindings.open_in_editor import (
-    load_open_in_editor_bindings,
-)
-from prot.prompt.key_binding.key_bindings import (
-    ConditionalKeyBindings,
-    DynamicKeyBindings,
-    KeyBindings,
-    KeyBindingsBase,
-    merge_key_bindings,
-)
+from prot.prompt.key_binding.bindings.auto_suggest import \
+    load_auto_suggest_bindings
+from prot.prompt.key_binding.bindings.completion import \
+    display_completions_like_readline
+from prot.prompt.key_binding.bindings.open_in_editor import \
+    load_open_in_editor_bindings
+from prot.prompt.key_binding.key_bindings import (ConditionalKeyBindings,
+                                                  DynamicKeyBindings,
+                                                  KeyBindings, KeyBindingsBase,
+                                                  merge_key_bindings)
 from prot.prompt.key_binding.key_processor import KeyPressEvent
 from prot.prompt.keys import Keys
 from prot.prompt.layout import Float, FloatContainer, HSplit, Window
 from prot.prompt.layout.containers import ConditionalContainer, WindowAlign
-from prot.prompt.layout.controls import (
-    BufferControl,
-    FormattedTextControl,
-    SearchBufferControl,
-)
+from prot.prompt.layout.controls import (BufferControl, FormattedTextControl,
+                                         SearchBufferControl)
 from prot.prompt.layout.dimension import Dimension
 from prot.prompt.layout.layout import Layout
-from prot.prompt.layout.menus import CompletionsMenu, MultiColumnCompletionsMenu
-from prot.prompt.layout.processors import (
-    AppendAutoSuggestion,
-    ConditionalProcessor,
-    DisplayMultipleCursors,
-    DynamicProcessor,
-    HighlightIncrementalSearchProcessor,
-    HighlightSelectionProcessor,
-    PasswordProcessor,
-    Processor,
-    ReverseSearchProcessor,
-    merge_processors,
-)
+from prot.prompt.layout.menus import (CompletionsMenu,
+                                      MultiColumnCompletionsMenu)
+from prot.prompt.layout.processors import (AppendAutoSuggestion,
+                                           ConditionalProcessor,
+                                           DisplayMultipleCursors,
+                                           DynamicProcessor,
+                                           HighlightIncrementalSearchProcessor,
+                                           HighlightSelectionProcessor,
+                                           PasswordProcessor, Processor,
+                                           ReverseSearchProcessor,
+                                           merge_processors)
 from prot.prompt.layout.utils import explode_text_fragments
 from prot.prompt.lexers import DynamicLexer, Lexer
 from prot.prompt.output import ColorDepth, DummyOutput, Output
-from prot.prompt.styles import (
-    BaseStyle,
-    ConditionalStyleTransformation,
-    DynamicStyle,
-    DynamicStyleTransformation,
-    StyleTransformation,
-    SwapLightAndDarkStyleTransformation,
-    merge_style_transformations,
-)
-from prot.prompt.utils import (
-    get_cwidth,
-    is_dumb_terminal,
-    suspend_to_background_supported,
-    to_str,
-)
+from prot.prompt.styles import (BaseStyle, ConditionalStyleTransformation,
+                                DynamicStyle, DynamicStyleTransformation,
+                                StyleTransformation,
+                                SwapLightAndDarkStyleTransformation,
+                                merge_style_transformations)
+from prot.prompt.utils import (get_cwidth, is_dumb_terminal,
+                               suspend_to_background_supported, to_str)
 from prot.prompt.validation import DynamicValidator, Validator
-from prot.prompt.widgets.toolbars import (
-    SearchToolbar,
-    SystemToolbar,
-    ValidationToolbar,
-)
+from prot.prompt.widgets.toolbars import (SearchToolbar, SystemToolbar,
+                                          ValidationToolbar)
 
 if TYPE_CHECKING:
     from prot.prompt.formatted_text.base import MagicFormattedText

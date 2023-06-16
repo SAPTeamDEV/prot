@@ -13,39 +13,21 @@ import os
 import signal
 import threading
 import traceback
-from prot import printMsg
 from asyncio import get_event_loop, new_event_loop, set_event_loop
-from typing import (
-    Generic,
-    Iterable,
-    List,
-    Optional,
-    Sequence,
-    Sized,
-    TextIO,
-    TypeVar,
-    cast,
-)
+from typing import (Generic, Iterable, List, Optional, Sequence, Sized, TextIO,
+                    TypeVar, cast)
 
+from prot import printMsg
 from prot.prompt.application import Application
 from prot.prompt.application.current import get_app_session
 from prot.prompt.filters import Condition, is_done, renderer_height_is_known
-from prot.prompt.formatted_text import (
-    AnyFormattedText,
-    StyleAndTextTuples,
-    to_formatted_text,
-)
+from prot.prompt.formatted_text import (AnyFormattedText, StyleAndTextTuples,
+                                        to_formatted_text)
 from prot.prompt.input import Input
 from prot.prompt.key_binding import KeyBindings
 from prot.prompt.key_binding.key_processor import KeyPressEvent
-from prot.prompt.layout import (
-    ConditionalContainer,
-    FormattedTextControl,
-    HSplit,
-    Layout,
-    VSplit,
-    Window,
-)
+from prot.prompt.layout import (ConditionalContainer, FormattedTextControl,
+                                HSplit, Layout, VSplit, Window)
 from prot.prompt.layout.controls import UIContent, UIControl
 from prot.prompt.layout.dimension import AnyDimension, D
 from prot.prompt.output import ColorDepth, Output
@@ -57,9 +39,8 @@ from .formatters import Formatter, create_default_formatters
 try:
     import contextvars
 except ImportError:
-    from prot.prompt.eventloop import (  # type: ignore
-        dummy_contextvars as contextvars,
-    )
+    from prot.prompt.eventloop import \
+        dummy_contextvars as contextvars  # type: ignore
 
 
 __all__ = ["ProgressBar"]

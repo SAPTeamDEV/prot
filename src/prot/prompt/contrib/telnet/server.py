@@ -4,10 +4,11 @@ Telnet server.
 import asyncio
 import contextvars  # Requires Python3.7!
 import socket
-from prot import printMsg
 from asyncio import get_event_loop
-from typing import Awaitable, Callable, List, Optional, Set, TextIO, Tuple, cast
+from typing import (Awaitable, Callable, List, Optional, Set, TextIO, Tuple,
+                    cast)
 
+from prot import printMsg
 from prot.prompt.application.current import create_app_session, get_app
 from prot.prompt.application.run_in_terminal import run_in_terminal
 from prot.prompt.data_structures import Size
@@ -18,19 +19,8 @@ from prot.prompt.renderer import print_formatted_text as print_formatted_text
 from prot.prompt.styles import BaseStyle, DummyStyle
 
 from .log import logger
-from .protocol import (
-    DO,
-    ECHO,
-    IAC,
-    LINEMODE,
-    MODE,
-    NAWS,
-    SB,
-    SE,
-    SUPPRESS_GO_AHEAD,
-    WILL,
-    TelnetProtocolParser,
-)
+from .protocol import (DO, ECHO, IAC, LINEMODE, MODE, NAWS, SB, SE,
+                       SUPPRESS_GO_AHEAD, WILL, TelnetProtocolParser)
 
 __all__ = [
     "TelnetServer",

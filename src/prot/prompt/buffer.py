@@ -11,32 +11,16 @@ import subprocess
 import tempfile
 from enum import Enum
 from functools import wraps
-from typing import (
-    Any,
-    Awaitable,
-    Callable,
-    Iterable,
-    List,
-    Optional,
-    Set,
-    Tuple,
-    TypeVar,
-    Union,
-    cast,
-)
+from typing import (Any, Awaitable, Callable, Iterable, List, Optional, Set,
+                    Tuple, TypeVar, Union, cast)
 
 from .application.current import get_app
 from .application.run_in_terminal import run_in_terminal
 from .auto_suggest import AutoSuggest, Suggestion
 from .cache import FastDictCache
 from .clipboard import ClipboardData
-from .completion import (
-    CompleteEvent,
-    Completer,
-    Completion,
-    DummyCompleter,
-    get_common_complete_suffix,
-)
+from .completion import (CompleteEvent, Completer, Completion, DummyCompleter,
+                         get_common_complete_suffix)
 from .document import Document
 from .filters import FilterOrBool, to_filter
 from .history import History, InMemoryHistory

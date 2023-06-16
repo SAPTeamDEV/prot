@@ -11,21 +11,14 @@ from prot.prompt.filters import FilterOrBool
 from prot.prompt.formatted_text import AnyFormattedText
 from prot.prompt.key_binding.bindings.focus import focus_next, focus_previous
 from prot.prompt.key_binding.defaults import load_key_bindings
-from prot.prompt.key_binding.key_bindings import KeyBindings, merge_key_bindings
+from prot.prompt.key_binding.key_bindings import (KeyBindings,
+                                                  merge_key_bindings)
 from prot.prompt.layout import Layout
 from prot.prompt.layout.containers import AnyContainer, HSplit
 from prot.prompt.layout.dimension import Dimension as D
 from prot.prompt.styles import BaseStyle
-from prot.prompt.widgets import (
-    Box,
-    Button,
-    CheckboxList,
-    Dialog,
-    Label,
-    ProgressBar,
-    RadioList,
-    TextArea,
-)
+from prot.prompt.widgets import (Box, Button, CheckboxList, Dialog, Label,
+                                 ProgressBar, RadioList, TextArea)
 
 __all__ = [
     "yes_no_dialog",

@@ -1,21 +1,11 @@
-from .dialogs import (
-    button_dialog,
-    checkboxlist_dialog,
-    input_dialog,
-    message_dialog,
-    progress_dialog,
-    radiolist_dialog,
-    yes_no_dialog,
-)
+from .dialogs import (button_dialog, checkboxlist_dialog, input_dialog,
+                      message_dialog, progress_dialog, radiolist_dialog,
+                      yes_no_dialog)
 from .progress_bar import ProgressBar
-from .prompt import (
-    CompleteStyle,
-    PromptSession,
-    confirm,
-    create_confirm_session,
-    prompt,
-)
-from .utils import clear, clear_title, print_container, print_formatted_text, set_title
+from .prompt import (CompleteStyle, PromptSession, confirm,
+                     create_confirm_session, prompt)
+from .utils import (clear, clear_title, print_container, print_formatted_text,
+                    set_title)
 
 __all__ = [
     # Dialogs.

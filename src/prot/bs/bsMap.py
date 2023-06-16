@@ -1,6 +1,6 @@
-from . import *
-
 import builtins as _builtins
+
+from . import *
 
 maps = {}
 depends = []

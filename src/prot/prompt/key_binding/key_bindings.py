@@ -35,18 +35,8 @@ been assigned, through the `key_binding` decorator.::
     kb.add(Keys.A, my_key_binding)
 """
 from abc import ABCMeta, abstractmethod, abstractproperty
-from typing import (
-    TYPE_CHECKING,
-    Callable,
-    Hashable,
-    List,
-    Optional,
-    Sequence,
-    Tuple,
-    TypeVar,
-    Union,
-    cast,
-)
+from typing import (TYPE_CHECKING, Callable, Hashable, List, Optional,
+                    Sequence, Tuple, TypeVar, Union, cast)
 
 from prot.prompt.cache import SimpleCache
 from prot.prompt.filters import FilterOrBool, Never, to_filter

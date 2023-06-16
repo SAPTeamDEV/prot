@@ -5,12 +5,14 @@ from typing import TYPE_CHECKING, Any, Generator, Optional
 try:
     from contextvars import ContextVar
 except ImportError:
-    from prot.prompt.eventloop.dummy_contextvars import ContextVar  # type: ignore
+    from prot.prompt.eventloop.dummy_contextvars import \
+        ContextVar  # type: ignore
 
 if TYPE_CHECKING:
-    from .application import Application
     from prot.prompt.input.defaults import Input
     from prot.prompt.output.defaults import Output
+
+    from .application import Application
 
 __all__ = [
     "get_app_session",

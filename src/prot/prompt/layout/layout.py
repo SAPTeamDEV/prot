@@ -5,13 +5,8 @@ from typing import Dict, Generator, Iterable, List, Optional, Union
 
 from prot.prompt.buffer import Buffer
 
-from .containers import (
-    AnyContainer,
-    ConditionalContainer,
-    Container,
-    Window,
-    to_container,
-)
+from .containers import (AnyContainer, ConditionalContainer, Container, Window,
+                         to_container)
 from .controls import BufferControl, SearchBufferControl, UIControl
 
 __all__ = [

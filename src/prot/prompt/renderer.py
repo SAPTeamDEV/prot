@@ -5,7 +5,8 @@ Renders the command line on the console.
 from asyncio import FIRST_COMPLETED, Future, sleep, wait
 from collections import deque
 from enum import Enum
-from typing import TYPE_CHECKING, Any, Callable, Deque, Dict, Hashable, Optional, Tuple
+from typing import (TYPE_CHECKING, Any, Callable, Deque, Dict, Hashable,
+                    Optional, Tuple)
 
 from prot.prompt.application.current import get_app
 from prot.prompt.data_structures import Point, Size
@@ -15,12 +16,8 @@ from prot.prompt.input.base import Input
 from prot.prompt.layout.mouse_handlers import MouseHandlers
 from prot.prompt.layout.screen import Char, Screen, WritePosition
 from prot.prompt.output import ColorDepth, Output
-from prot.prompt.styles import (
-    Attrs,
-    BaseStyle,
-    DummyStyleTransformation,
-    StyleTransformation,
-)
+from prot.prompt.styles import (Attrs, BaseStyle, DummyStyleTransformation,
+                                StyleTransformation)
 from prot.prompt.utils import is_windows
 
 if TYPE_CHECKING:

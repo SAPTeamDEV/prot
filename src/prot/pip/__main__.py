@@ -1,6 +1,7 @@
 import sys
-from . import *
+
 from .. import *
+from . import *
 
 exit = False
 if "light" in status:

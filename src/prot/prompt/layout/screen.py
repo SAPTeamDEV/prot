@@ -1,5 +1,6 @@
 from collections import defaultdict
-from typing import TYPE_CHECKING, Callable, DefaultDict, Dict, List, Optional, Tuple
+from typing import (TYPE_CHECKING, Callable, DefaultDict, Dict, List, Optional,
+                    Tuple)
 
 from prot.prompt.cache import FastDictCache
 from prot.prompt.data_structures import Point

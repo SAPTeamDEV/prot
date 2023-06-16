@@ -1,14 +1,6 @@
 import os
-from ctypes import (
-    ArgumentError,
-    byref,
-    c_char,
-    c_long,
-    c_uint,
-    c_ulong,
-    pointer,
-    windll,
-)
+from ctypes import (ArgumentError, byref, c_char, c_long, c_uint, c_ulong,
+                    pointer, windll)
 from ctypes.wintypes import DWORD, HANDLE
 from typing import Dict, List, TextIO, Tuple
 
@@ -16,13 +8,9 @@ from prot.prompt.data_structures import Size
 from prot.prompt.renderer import Output
 from prot.prompt.styles import ANSI_COLOR_NAMES, Attrs
 from prot.prompt.utils import get_cwidth
-from prot.prompt.win32_types import (
-    CONSOLE_SCREEN_BUFFER_INFO,
-    COORD,
-    SMALL_RECT,
-    STD_INPUT_HANDLE,
-    STD_OUTPUT_HANDLE,
-)
+from prot.prompt.win32_types import (CONSOLE_SCREEN_BUFFER_INFO, COORD,
+                                     SMALL_RECT, STD_INPUT_HANDLE,
+                                     STD_OUTPUT_HANDLE)
 
 from .color_depth import ColorDepth
 

@@ -3,25 +3,17 @@ from typing import TYPE_CHECKING, Any, Optional, TextIO
 
 from prot.prompt.application import Application
 from prot.prompt.application.current import get_app_session
-from prot.prompt.formatted_text import (
-    FormattedText,
-    StyleAndTextTuples,
-    to_formatted_text,
-)
+from prot.prompt.formatted_text import (FormattedText, StyleAndTextTuples,
+                                        to_formatted_text)
 from prot.prompt.input import DummyInput
 from prot.prompt.layout import Layout
 from prot.prompt.output import ColorDepth, Output
 from prot.prompt.output.defaults import create_output
-from prot.prompt.renderer import (
-    print_formatted_text as renderer_print_formatted_text,
-)
-from prot.prompt.styles import (
-    BaseStyle,
-    StyleTransformation,
-    default_pygments_style,
-    default_ui_style,
-    merge_styles,
-)
+from prot.prompt.renderer import \
+    print_formatted_text as renderer_print_formatted_text
+from prot.prompt.styles import (BaseStyle, StyleTransformation,
+                                default_pygments_style, default_ui_style,
+                                merge_styles)
 
 if TYPE_CHECKING:
     from prot.prompt.layout.containers import Container

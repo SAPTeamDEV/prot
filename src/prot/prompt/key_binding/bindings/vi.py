@@ -3,34 +3,23 @@ import codecs
 import string
 from enum import Enum
 from itertools import accumulate
-from typing import Callable, Iterable, List, Optional, Tuple, TypeVar, Union, cast
+from typing import (Callable, Iterable, List, Optional, Tuple, TypeVar, Union,
+                    cast)
 
 from prot.prompt.application.current import get_app
 from prot.prompt.buffer import Buffer, indent, reshape_text, unindent
 from prot.prompt.clipboard import ClipboardData
 from prot.prompt.document import Document
-from prot.prompt.filters import (
-    Always,
-    Condition,
-    Filter,
-    has_arg,
-    is_read_only,
-    is_searching,
-)
-from prot.prompt.filters.app import (
-    in_paste_mode,
-    is_multiline,
-    vi_digraph_mode,
-    vi_insert_mode,
-    vi_insert_multiple_mode,
-    vi_mode,
-    vi_navigation_mode,
-    vi_recording_macro,
-    vi_replace_mode,
-    vi_search_direction_reversed,
-    vi_selection_mode,
-    vi_waiting_for_text_object_mode,
-)
+from prot.prompt.filters import (Always, Condition, Filter, has_arg,
+                                 is_read_only, is_searching)
+from prot.prompt.filters.app import (in_paste_mode, is_multiline,
+                                     vi_digraph_mode, vi_insert_mode,
+                                     vi_insert_multiple_mode, vi_mode,
+                                     vi_navigation_mode, vi_recording_macro,
+                                     vi_replace_mode,
+                                     vi_search_direction_reversed,
+                                     vi_selection_mode,
+                                     vi_waiting_for_text_object_mode)
 from prot.prompt.input.vt100_parser import Vt100Parser
 from prot.prompt.key_binding.digraphs import DIGRAPHS
 from prot.prompt.key_binding.key_processor import KeyPress, KeyPressEvent

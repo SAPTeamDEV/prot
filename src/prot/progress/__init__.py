@@ -14,11 +14,12 @@
 
 from __future__ import division, print_function
 
-from .. import printMsg
 from collections import deque
 from datetime import timedelta
 from math import ceil
 from sys import stderr, stdout
+
+from .. import printMsg
 
 try:
     from time import monotonic

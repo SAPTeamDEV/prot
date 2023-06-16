@@ -1,8 +1,4 @@
-from .. import printMsg, printWarn, printErr, Database, LoopBack, ProtString
-
-from . import bs
-from . import bsMap
-from . import bsPro
-from . import bsSpaz
+from .. import Database, LoopBack, ProtString, printErr, printMsg, printWarn
+from . import bs, bsMap, bsPro, bsSpaz
 
 __version__ = "1.1"

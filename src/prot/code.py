@@ -1,5 +1,9 @@
-from . import printMsg, printErr, printWarn, Database, list2str
-import random, base64 as __cmethst__, os, sys
+import base64 as __cmethst__
+import os
+import random
+import sys
+
+from . import Database, list2str, printErr, printMsg, printWarn
 
 __spec__.data = Database()
 __spec__.data.codeType = [

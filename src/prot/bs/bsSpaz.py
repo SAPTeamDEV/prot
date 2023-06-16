@@ -1,7 +1,7 @@
-from . import *
-
 import os
 import shutil
+
+from . import *
 
 appearances = {}
 

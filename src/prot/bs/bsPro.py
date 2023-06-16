@@ -1,8 +1,7 @@
-from . import *
-
 import json
-
 from base64 import b64encode
+
+from . import *
 
 
 def bpp2cbpp(source):

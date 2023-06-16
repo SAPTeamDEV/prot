@@ -3,41 +3,23 @@ from typing import Optional
 from prot.prompt.application.current import get_app
 from prot.prompt.buffer import Buffer
 from prot.prompt.enums import SYSTEM_BUFFER
-from prot.prompt.filters import (
-    Condition,
-    FilterOrBool,
-    emacs_mode,
-    has_arg,
-    has_completions,
-    has_focus,
-    has_validation_error,
-    to_filter,
-    vi_mode,
-    vi_navigation_mode,
-)
-from prot.prompt.formatted_text import (
-    AnyFormattedText,
-    StyleAndTextTuples,
-    fragment_list_len,
-    to_formatted_text,
-)
-from prot.prompt.key_binding.key_bindings import (
-    ConditionalKeyBindings,
-    KeyBindings,
-    KeyBindingsBase,
-    merge_key_bindings,
-)
+from prot.prompt.filters import (Condition, FilterOrBool, emacs_mode, has_arg,
+                                 has_completions, has_focus,
+                                 has_validation_error, to_filter, vi_mode,
+                                 vi_navigation_mode)
+from prot.prompt.formatted_text import (AnyFormattedText, StyleAndTextTuples,
+                                        fragment_list_len, to_formatted_text)
+from prot.prompt.key_binding.key_bindings import (ConditionalKeyBindings,
+                                                  KeyBindings, KeyBindingsBase,
+                                                  merge_key_bindings)
 from prot.prompt.key_binding.key_processor import KeyPressEvent
 from prot.prompt.key_binding.vi_state import InputMode
 from prot.prompt.keys import Keys
-from prot.prompt.layout.containers import ConditionalContainer, Container, Window
-from prot.prompt.layout.controls import (
-    BufferControl,
-    FormattedTextControl,
-    SearchBufferControl,
-    UIContent,
-    UIControl,
-)
+from prot.prompt.layout.containers import (ConditionalContainer, Container,
+                                           Window)
+from prot.prompt.layout.controls import (BufferControl, FormattedTextControl,
+                                         SearchBufferControl, UIContent,
+                                         UIControl)
 from prot.prompt.layout.dimension import Dimension
 from prot.prompt.layout.processors import BeforeInput
 from prot.prompt.lexers import SimpleLexer

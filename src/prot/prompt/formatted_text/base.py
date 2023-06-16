@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Any, Callable, Iterable, List, Tuple, Union, cast
+from typing import (TYPE_CHECKING, Any, Callable, Iterable, List, Tuple, Union,
+                    cast)
 
 from prot.prompt.mouse_events import MouseEvent
 

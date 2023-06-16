@@ -7,28 +7,18 @@ fragment types.
 """
 import re
 from abc import ABCMeta, abstractmethod
-from typing import (
-    TYPE_CHECKING,
-    Callable,
-    Hashable,
-    List,
-    Optional,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import (TYPE_CHECKING, Callable, Hashable, List, Optional, Tuple,
+                    Type, Union, cast)
 
 from prot.prompt.application.current import get_app
 from prot.prompt.cache import SimpleCache
 from prot.prompt.document import Document
-from prot.prompt.filters import FilterOrBool, to_filter, vi_insert_multiple_mode
-from prot.prompt.formatted_text import (
-    AnyFormattedText,
-    StyleAndTextTuples,
-    to_formatted_text,
-)
-from prot.prompt.formatted_text.utils import fragment_list_len, fragment_list_to_text
+from prot.prompt.filters import (FilterOrBool, to_filter,
+                                 vi_insert_multiple_mode)
+from prot.prompt.formatted_text import (AnyFormattedText, StyleAndTextTuples,
+                                        to_formatted_text)
+from prot.prompt.formatted_text.utils import (fragment_list_len,
+                                              fragment_list_to_text)
 from prot.prompt.search import SearchDirection
 from prot.prompt.utils import to_int, to_str
 

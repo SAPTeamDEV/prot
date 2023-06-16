@@ -1,4 +1,5 @@
-from prot.prompt.completion.filesystem import ExecutableCompleter, PathCompleter
+from prot.prompt.completion.filesystem import (ExecutableCompleter,
+                                               PathCompleter)
 from prot.prompt.contrib.regular_languages.compiler import compile
 from prot.prompt.contrib.regular_languages.completion import GrammarCompleter
 

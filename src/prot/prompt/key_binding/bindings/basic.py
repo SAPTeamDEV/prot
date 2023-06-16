@@ -1,13 +1,7 @@
 # pylint: disable=function-redefined
 from prot.prompt.application.current import get_app
-from prot.prompt.filters import (
-    Condition,
-    emacs_insert_mode,
-    has_selection,
-    in_paste_mode,
-    is_multiline,
-    vi_insert_mode,
-)
+from prot.prompt.filters import (Condition, emacs_insert_mode, has_selection,
+                                 in_paste_mode, is_multiline, vi_insert_mode)
 from prot.prompt.key_binding.key_processor import KeyPress, KeyPressEvent
 from prot.prompt.keys import Keys
 

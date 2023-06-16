@@ -5,54 +5,26 @@ Container for the layout.
 from abc import ABCMeta, abstractmethod
 from enum import Enum
 from functools import partial
-from typing import (
-    TYPE_CHECKING,
-    Callable,
-    Dict,
-    List,
-    Optional,
-    Sequence,
-    Tuple,
-    Union,
-    cast,
-)
+from typing import (TYPE_CHECKING, Callable, Dict, List, Optional, Sequence,
+                    Tuple, Union, cast)
 
 from prot.prompt.application.current import get_app
 from prot.prompt.cache import SimpleCache
 from prot.prompt.data_structures import Point
-from prot.prompt.filters import (
-    FilterOrBool,
-    emacs_insert_mode,
-    to_filter,
-    vi_insert_mode,
-)
-from prot.prompt.formatted_text import (
-    AnyFormattedText,
-    StyleAndTextTuples,
-    to_formatted_text,
-)
-from prot.prompt.formatted_text.utils import (
-    fragment_list_to_text,
-    fragment_list_width,
-)
+from prot.prompt.filters import (FilterOrBool, emacs_insert_mode, to_filter,
+                                 vi_insert_mode)
+from prot.prompt.formatted_text import (AnyFormattedText, StyleAndTextTuples,
+                                        to_formatted_text)
+from prot.prompt.formatted_text.utils import (fragment_list_to_text,
+                                              fragment_list_width)
 from prot.prompt.key_binding import KeyBindingsBase
 from prot.prompt.mouse_events import MouseEvent, MouseEventType
 from prot.prompt.utils import get_cwidth, take_using_weights, to_int, to_str
 
-from .controls import (
-    DummyControl,
-    FormattedTextControl,
-    GetLinePrefixCallable,
-    UIContent,
-    UIControl,
-)
-from .dimension import (
-    AnyDimension,
-    Dimension,
-    max_layout_dimensions,
-    sum_layout_dimensions,
-    to_dimension,
-)
+from .controls import (DummyControl, FormattedTextControl,
+                       GetLinePrefixCallable, UIContent, UIControl)
+from .dimension import (AnyDimension, Dimension, max_layout_dimensions,
+                        sum_layout_dimensions, to_dimension)
 from .margins import Margin
 from .mouse_handlers import MouseHandlers
 from .screen import _CHAR_CACHE, Screen, WritePosition

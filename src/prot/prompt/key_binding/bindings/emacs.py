@@ -4,18 +4,11 @@ from typing import Dict, Union
 from prot.prompt.application.current import get_app
 from prot.prompt.buffer import Buffer, SelectionType, indent, unindent
 from prot.prompt.completion import CompleteEvent
-from prot.prompt.filters import (
-    Condition,
-    emacs_insert_mode,
-    emacs_mode,
-    has_arg,
-    has_selection,
-    in_paste_mode,
-    is_multiline,
-    is_read_only,
-    shift_selection_mode,
-    vi_search_direction_reversed,
-)
+from prot.prompt.filters import (Condition, emacs_insert_mode, emacs_mode,
+                                 has_arg, has_selection, in_paste_mode,
+                                 is_multiline, is_read_only,
+                                 shift_selection_mode,
+                                 vi_search_direction_reversed)
 from prot.prompt.key_binding.key_bindings import Binding
 from prot.prompt.key_binding.key_processor import KeyPressEvent
 from prot.prompt.keys import Keys

@@ -2,19 +2,14 @@ from typing import Callable, Iterable, List, Optional, Sequence, Union
 
 from prot.prompt.application.current import get_app
 from prot.prompt.filters import Condition
-from prot.prompt.formatted_text.base import OneStyleAndTextTuple, StyleAndTextTuples
+from prot.prompt.formatted_text.base import (OneStyleAndTextTuple,
+                                             StyleAndTextTuples)
 from prot.prompt.key_binding.key_bindings import KeyBindings, KeyBindingsBase
 from prot.prompt.key_binding.key_processor import KeyPressEvent
 from prot.prompt.keys import Keys
-from prot.prompt.layout.containers import (
-    AnyContainer,
-    ConditionalContainer,
-    Container,
-    Float,
-    FloatContainer,
-    HSplit,
-    Window,
-)
+from prot.prompt.layout.containers import (AnyContainer, ConditionalContainer,
+                                           Container, Float, FloatContainer,
+                                           HSplit, Window)
 from prot.prompt.layout.controls import FormattedTextControl
 from prot.prompt.mouse_events import MouseEvent, MouseEventType
 from prot.prompt.utils import get_cwidth

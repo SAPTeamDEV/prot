@@ -1,11 +1,10 @@
-from . import *
-
-import os
 import hashlib
+import os
 import shutil
-
 from base64 import b64encode
 from functools import partial
+
+from . import *
 
 treeCache = {}
 

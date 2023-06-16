@@ -1,34 +1,16 @@
 import math
 from itertools import zip_longest
-from typing import (
-    TYPE_CHECKING,
-    Callable,
-    Dict,
-    Iterable,
-    List,
-    Optional,
-    Tuple,
-    TypeVar,
-    Union,
-    cast,
-)
+from typing import (TYPE_CHECKING, Callable, Dict, Iterable, List, Optional,
+                    Tuple, TypeVar, Union, cast)
 
 from prot.prompt.application.current import get_app
 from prot.prompt.buffer import CompletionState
 from prot.prompt.completion import Completion
 from prot.prompt.data_structures import Point
-from prot.prompt.filters import (
-    Condition,
-    FilterOrBool,
-    has_completions,
-    is_done,
-    to_filter,
-)
-from prot.prompt.formatted_text import (
-    StyleAndTextTuples,
-    fragment_list_width,
-    to_formatted_text,
-)
+from prot.prompt.filters import (Condition, FilterOrBool, has_completions,
+                                 is_done, to_filter)
+from prot.prompt.formatted_text import (StyleAndTextTuples,
+                                        fragment_list_width, to_formatted_text)
 from prot.prompt.key_binding.key_processor import KeyPressEvent
 from prot.prompt.layout.utils import explode_text_fragments
 from prot.prompt.mouse_events import MouseEvent, MouseEventType

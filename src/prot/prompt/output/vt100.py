@@ -9,19 +9,8 @@ http://pygments.org/
 import array
 import errno
 import sys
-from typing import (
-    IO,
-    Callable,
-    Dict,
-    Hashable,
-    Iterable,
-    List,
-    Optional,
-    Sequence,
-    Set,
-    TextIO,
-    Tuple,
-)
+from typing import (IO, Callable, Dict, Hashable, Iterable, List, Optional,
+                    Sequence, Set, TextIO, Tuple)
 
 from prot.prompt.data_structures import Size
 from prot.prompt.output import Output

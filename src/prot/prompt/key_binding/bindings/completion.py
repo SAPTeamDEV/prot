@@ -6,11 +6,8 @@ import math
 from typing import TYPE_CHECKING, List
 
 from prot.prompt.application.run_in_terminal import in_terminal
-from prot.prompt.completion import (
-    CompleteEvent,
-    Completion,
-    get_common_complete_suffix,
-)
+from prot.prompt.completion import (CompleteEvent, Completion,
+                                    get_common_complete_suffix)
 from prot.prompt.formatted_text import StyleAndTextTuples
 from prot.prompt.key_binding.key_bindings import KeyBindings
 from prot.prompt.key_binding.key_processor import KeyPressEvent
@@ -87,8 +84,8 @@ def _display_completions_like_readline(
     This will ask for a confirmation if there are too many completions to fit
     on a single page and provide a paginator to walk through them.
     """
-    from prot.prompt.shortcuts.prompt import create_confirm_session
     from prot.prompt.formatted_text import to_formatted_text
+    from prot.prompt.shortcuts.prompt import create_confirm_session
 
     # Get terminal dimensions.
     term_size = app.output.get_size()
