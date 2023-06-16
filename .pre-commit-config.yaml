@@ -23,4 +23,4 @@ repos:
     stages:
     - push
   repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.3.0
+  rev: 3.3.0
