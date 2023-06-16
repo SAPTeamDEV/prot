@@ -37,7 +37,6 @@ class WordCompleter(Completer):
         match_middle: bool = False,
         pattern: Optional[Pattern[str]] = None,
     ) -> None:
-
         assert not (WORD and sentence)
 
         self.words = words
@@ -68,7 +67,7 @@ class WordCompleter(Completer):
             word_before_cursor = word_before_cursor.lower()
 
         def word_matches(word: str) -> bool:
-            """ True when the word before the cursor matches. """
+            """True when the word before the cursor matches."""
             if self.ignore_case:
                 word = word.lower()
 

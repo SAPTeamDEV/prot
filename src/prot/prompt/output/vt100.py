@@ -177,7 +177,6 @@ class _16ColorCache:
     def _get(
         self, value: Tuple[int, int, int], exclude: Sequence[str] = ()
     ) -> _ColorCodeAndName:
-
         r, g, b = value
         match = _get_closest_ansi_color(r, g, b, exclude=exclude)
 
@@ -300,7 +299,7 @@ class _EscapeCodeCache(Dict[Attrs, str]):
         return result
 
     def _color_name_to_rgb(self, color: str) -> Tuple[int, int, int]:
-        " Turn 'ffffff', into (0xff, 0xff, 0xff). "
+        "Turn 'ffffff', into (0xff, 0xff, 0xff)."
         try:
             rgb = int(color, 16)
         except ValueError:
@@ -416,7 +415,6 @@ class Vt100_Output(Output):
         term: Optional[str] = None,
         write_binary: bool = True,
     ) -> None:
-
         assert all(hasattr(stdout, a) for a in ("write", "flush"))
 
         if write_binary:
@@ -476,11 +474,11 @@ class Vt100_Output(Output):
         return self._get_size()
 
     def fileno(self) -> int:
-        " Return file descriptor. "
+        "Return file descriptor."
         return self.stdout.fileno()
 
     def encoding(self) -> str:
-        " Return encoding used for stdout. "
+        "Return encoding used for stdout."
         return self.stdout.encoding
 
     def write_raw(self, data: str) -> None:
@@ -680,6 +678,6 @@ class Vt100_Output(Output):
         self.flush()
 
     def bell(self) -> None:
-        " Sound bell. "
+        "Sound bell."
         self.write_raw("\a")
         self.flush()

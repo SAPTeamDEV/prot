@@ -9,36 +9,43 @@ from functools import partial
 
 treeCache = {}
 
+
 def getModel(file):
-    return file + '.bob'
+    return file + ".bob"
+
 
 def getCollideModel(file):
-    return file + '.cob'
+    return file + ".cob"
+
 
 def getTexture(file):
-    return file + '.texture'
+    return file + ".texture"
+
 
 def getSound(file):
-    return file + '.ogg'
+    return file + ".ogg"
 
-class Material(LoopBack): pass
+
+class Material(LoopBack):
+    pass
+
 
 class Factory(object):
     def __setattr__(self, key, value):
-        if key in ['dict', 'getcontents'] or key.startswith('_'):
+        if key in ["dict", "getcontents"] or key.startswith("_"):
             object.__setattr__(self, key, value)
-        if not hasattr(self, 'dict'):
+        if not hasattr(self, "dict"):
             self.dict = {}
         self.dict[key] = value
 
     def __getattribute__(self, key):
-        if key in ['dict', 'getcontents'] or key.startswith('_'):
+        if key in ["dict", "getcontents"] or key.startswith("_"):
             return object.__getattribute__(self, key, value)
-        if not hasattr(self, 'dict'):
+        if not hasattr(self, "dict"):
             self.dict = {}
         return self.dict[key]
 
-    def getcontents(self, path='.'):
+    def getcontents(self, path="."):
         files = []
         data = {self.__class__.__name__: files}
         for key, value in self.dict.items():
@@ -49,43 +56,48 @@ class Factory(object):
             else:
                 continue
             for fileName in values:
-                if fileName.endswith('.texture'):
-                    files += bs.getFiles(fileName.split('.')[0], path, ['ktx', 'dds'])
+                if fileName.endswith(".texture"):
+                    files += bs.getFiles(fileName.split(".")[0], path, ["ktx", "dds"])
                 else:
                     files.append(fileName)
         return data
 
+
 def md5sum(filename):
-    with open(filename, mode='rb') as f:
+    with open(filename, mode="rb") as f:
         d = hashlib.md5()
-        for buf in iter(partial(f.read, 128), b''):
+        for buf in iter(partial(f.read, 128), b""):
             d.update(buf)
     return d.hexdigest()
+
 
 def genPayloadInfo():
     files = []
     for root, subdirs, files_in_dir in os.walk(".", topdown=True, followlinks=False):
         for file in files_in_dir:
-            if file.startswith('.') or file == 'payload_info': continue
+            if file.startswith(".") or file == "payload_info":
+                continue
             files.append(os.path.join(root, file))
 
     payloadStr = "{}\n1\n".format(len(files))
     for file in files:
         payloadStr += "{} {}\n".format(file.strip("./"), md5sum(file))
 
-    with open('payload_info', 'w') as f:
+    with open("payload_info", "w") as f:
         f.write(payloadStr)
         f.close()
 
-def getFiles(file, path='.', formats=['ogg', 'ktx', 'dds', 'bob', 'cob', 'py', 'pyc']):
+
+def getFiles(file, path=".", formats=["ogg", "ktx", "dds", "bob", "cob", "py", "pyc"]):
     tree = makeTree(path)
     files = []
     for format in formats:
-        if file + '.' + format in tree:
-            files.append(file + '.' + format)
+        if file + "." + format in tree:
+            files.append(file + "." + format)
     return files
 
-def makeTree(source='.', ignoreCache=False):
+
+def makeTree(source=".", ignoreCache=False):
     if source in treeCache and not ignoreCache:
         return treeCache[source]
     tree = {}
@@ -99,28 +111,34 @@ def makeTree(source='.', ignoreCache=False):
         treeCache[source] = tree
     return tree
 
+
 def encodeFile(source):
-    ff = open('coded-'+source,'wb')
-    ff.write('import base64;exec(base64.b64decode('+repr(b64encode(open(source).read()))+'))')
+    ff = open("coded-" + source, "wb")
+    ff.write(
+        "import base64;exec(base64.b64decode("
+        + repr(b64encode(open(source).read()))
+        + "))"
+    )
     ff.flush()
 
-def processMedia(data, path='.', divide=False, silent=False):
+
+def processMedia(data, path=".", divide=False, silent=False):
     tree = makeTree(path)
-    media = os.path.join(path, 'media')
+    media = os.path.join(path, "media")
     if not os.path.isdir(media):
         os.mkdir(media)
     for name, files in data.items():
         if divide:
             media = os.path.join(media, name)
             if not os.path.isdir(media):
-              os.mkdir(media)
+                os.mkdir(media)
 
-        audios = os.path.join(media, 'audios')
-        tex = os.path.join(media, 'textures')
-        texAndroid = os.path.join(tex, 'android')
-        texOther = os.path.join(tex, 'other')
-        models = os.path.join(media, 'models')
-        scripts = os.path.join(media, 'scripts')
+        audios = os.path.join(media, "audios")
+        tex = os.path.join(media, "textures")
+        texAndroid = os.path.join(tex, "android")
+        texOther = os.path.join(tex, "other")
+        models = os.path.join(media, "models")
+        scripts = os.path.join(media, "scripts")
 
         if not os.path.isdir(audios):
             os.mkdir(audios)
@@ -135,35 +153,35 @@ def processMedia(data, path='.', divide=False, silent=False):
         if not os.path.isdir(scripts):
             os.mkdir(scripts)
 
-        audioFormats = ['ogg']
-        texFormats = ['dds', 'ktx']
-        modelFormats = ['bob', 'cob']
-        scriptFormats = ['py', 'pyc']
+        audioFormats = ["ogg"]
+        texFormats = ["dds", "ktx"]
+        modelFormats = ["bob", "cob"]
+        scriptFormats = ["py", "pyc"]
 
         for file in files:
             if file in tree:
                 if file.type in audioFormats:
                     if not silent:
-                        print(file + ' -> ' + audios)
+                        print(file + " -> " + audios)
                     shutil.copy(tree[file], audios)
                 elif file.type in texFormats:
-                    if file.type == 'ktx':
+                    if file.type == "ktx":
                         if not silent:
-                            print(file + ' -> ' + texAndroid)
+                            print(file + " -> " + texAndroid)
                         shutil.copy(tree[file], texAndroid)
                     else:
                         if not silent:
-                            print(file + ' -> ' + texOther)
+                            print(file + " -> " + texOther)
                         shutil.copy(tree[file], texOther)
                 elif file.type in modelFormats:
                     if not silent:
-                        print(file + ' -> ' + models)
+                        print(file + " -> " + models)
                     shutil.copy(tree[file], models)
                 elif file.type in scriptFormats:
                     if not silent:
-                        print(file + ' -> ' + scripts)
+                        print(file + " -> " + scripts)
                     shutil.copy(tree[file], scripts)
                 else:
-                   printWarn('type of file ' + file + ' is not supported')
+                    printWarn("type of file " + file + " is not supported")
             else:
-                printWarn('file ' + file + ' not found')
+                printWarn("file " + file + " not found")

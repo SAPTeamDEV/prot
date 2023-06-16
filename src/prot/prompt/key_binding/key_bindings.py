@@ -510,14 +510,13 @@ class ConditionalKeyBindings(_Proxy):
     def __init__(
         self, key_bindings: KeyBindingsBase, filter: FilterOrBool = True
     ) -> None:
-
         _Proxy.__init__(self)
 
         self.key_bindings = key_bindings
         self.filter = to_filter(filter)
 
     def _update_cache(self) -> None:
-        " If the original key bindings was changed. Update our copy version. "
+        "If the original key bindings was changed. Update our copy version."
         expected_version = self.key_bindings._version
 
         if self._last_version != expected_version:

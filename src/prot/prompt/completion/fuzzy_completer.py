@@ -50,7 +50,6 @@ class FuzzyCompleter(Completer):
         pattern: Optional[str] = None,
         enable_fuzzy: FilterOrBool = True,
     ):
-
         assert pattern is None or pattern.startswith("^")
 
         self.completer = completer
@@ -77,7 +76,6 @@ class FuzzyCompleter(Completer):
     def _get_fuzzy_completions(
         self, document: Document, complete_event: CompleteEvent
     ) -> Iterable[Completion]:
-
         word_before_cursor = document.get_word_before_cursor(
             pattern=re.compile(self._get_pattern())
         )
@@ -105,7 +103,7 @@ class FuzzyCompleter(Completer):
                 )
 
         def sort_key(fuzzy_match: "_FuzzyMatch") -> Tuple[int, int]:
-            " Sort by start position, then by the length of the match. "
+            "Sort by start position, then by the length of the match."
             return fuzzy_match.start_pos, fuzzy_match.match_length
 
         fuzzy_matches = sorted(fuzzy_matches, key=sort_key)
@@ -176,7 +174,6 @@ class FuzzyWordCompleter(Completer):
         meta_dict: Optional[Dict[str, str]] = None,
         WORD: bool = False,
     ) -> None:
-
         self.words = words
         self.meta_dict = meta_dict or {}
         self.WORD = WORD

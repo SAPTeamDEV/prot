@@ -108,7 +108,6 @@ class TelnetConnection:
         encoding: str,
         style: Optional[BaseStyle],
     ) -> None:
-
         self.conn = conn
         self.addr = addr
         self.interact = interact
@@ -134,11 +133,11 @@ class TelnetConnection:
         self.vt100_output = Vt100_Output(self.stdout, get_size, write_binary=False)
 
         def data_received(data: bytes) -> None:
-            """ TelnetProtocolParser 'data_received' callback """
+            """TelnetProtocolParser 'data_received' callback"""
             self.vt100_input.send_bytes(data)
 
         def size_received(rows: int, columns: int) -> None:
-            """ TelnetProtocolParser 'size_received' callback """
+            """TelnetProtocolParser 'size_received' callback"""
             self.size = Size(rows=rows, columns=columns)
             get_app()._on_resize()
 
@@ -247,7 +246,6 @@ class TelnetServer:
         encoding: str = "utf-8",
         style: Optional[BaseStyle] = None,
     ) -> None:
-
         self.host = host
         self.port = port
         self.interact = interact

@@ -17,66 +17,70 @@ def bsGetLevels():
     # multiple targets and a regular one with a single bomb and 2 targets
     return [
         bs.Level(
-            'Target Practice',
-            displayName='Pro ${GAME}',
+            "Target Practice",
+            displayName="Pro ${GAME}",
             gameType=TargetPracticeGame,
             settings={},
-            previewTexName='doomShroomPreview'),
+            previewTexName="doomShroomPreview",
+        ),
         bs.Level(
-            'Target Practice B',
-            displayName='${GAME}',
+            "Target Practice B",
+            displayName="${GAME}",
             gameType=TargetPracticeGame,
             settings={
-                'Target Count': 2,
-                'Enable Impact Bombs': False,
-                'Enable Triple Bombs': False
+                "Target Count": 2,
+                "Enable Impact Bombs": False,
+                "Enable Triple Bombs": False,
             },
-            previewTexName='doomShroomPreview')
+            previewTexName="doomShroomPreview",
+        ),
     ]
 
 
 class TargetPracticeGame(bs.TeamGameActivity):
     @classmethod
     def getName(cls):
-        return 'Target Practice'
+        return "Target Practice"
 
     @classmethod
     def getDescription(cls, sessionType):
-        return 'Bomb as many targets as you can.'
+        return "Bomb as many targets as you can."
 
     @classmethod
     def getSupportedMaps(cls, sessionType):
-        return ['Doom Shroom']
+        return ["Doom Shroom"]
 
     @classmethod
     def supportsSessionType(cls, sessionType):
         # we support teams, co-op, and free-for-all
-        return True if (issubclass(sessionType, bs.CoopSession)
-                        or issubclass(sessionType, bs.TeamsSession)
-                        or issubclass(sessionType,
-                                      bs.FreeForAllSession)) else False
+        return (
+            True
+            if (
+                issubclass(sessionType, bs.CoopSession)
+                or issubclass(sessionType, bs.TeamsSession)
+                or issubclass(sessionType, bs.FreeForAllSession)
+            )
+            else False
+        )
 
     @classmethod
     def getSettings(cls, sessionType):
-        return [("Target Count", {
-            'minValue': 1,
-            'default': 3
-        }), ("Enable Impact Bombs", {
-            'default': True
-        }), ("Enable Triple Bombs", {
-            'default': True
-        })]
+        return [
+            ("Target Count", {"minValue": 1, "default": 3}),
+            ("Enable Impact Bombs", {"default": True}),
+            ("Enable Triple Bombs", {"default": True}),
+        ]
 
     def __init__(self, settings):
         bs.TeamGameActivity.__init__(self, settings)
         self._scoreBoard = bs.ScoreBoard()
 
     def onTransitionIn(self):
-        bs.TeamGameActivity.onTransitionIn(self, music='ForwardMarch')
+        bs.TeamGameActivity.onTransitionIn(self, music="ForwardMarch")
 
     def onTeamJoin(self, team):
         # we use this in place of a regular int to make it harder to hack scores
-        team.gameData['score'] = bs.SecureInt(0)
+        team.gameData["score"] = bs.SecureInt(0)
         if self.hasBegun():
             self._updateScoreBoard()
 
@@ -87,8 +91,8 @@ class TargetPracticeGame(bs.TeamGameActivity):
         self._targets = []
 
         # number of targets is based on player count
-        #numTargets = min(5,len(self.initialPlayerInfo)+2)
-        numTargets = self.settings['Target Count']
+        # numTargets = min(5,len(self.initialPlayerInfo)+2)
+        numTargets = self.settings["Target Count"]
         for i in range(numTargets):
             bs.gameTimer(5000 + i * 1000, self._spawnTarget)
 
@@ -99,24 +103,26 @@ class TargetPracticeGame(bs.TeamGameActivity):
 
     def spawnPlayer(self, player):
         spawnCenter = (0, 3, -5)
-        pos = (spawnCenter[0] + random.uniform(-1.5, 1.5), spawnCenter[1],
-               spawnCenter[2] + random.uniform(-1.5, 1.5))
+        pos = (
+            spawnCenter[0] + random.uniform(-1.5, 1.5),
+            spawnCenter[1],
+            spawnCenter[2] + random.uniform(-1.5, 1.5),
+        )
 
         # reset their streak
-        player.gameData['streak'] = 0
+        player.gameData["streak"] = 0
 
         spaz = self.spawnPlayerSpaz(player, position=pos)
 
         # give players permanent triple impact bombs and wire them up
         # to tell us when they drop a bomb
-        if self.settings['Enable Impact Bombs']:
-            spaz.bombType = 'impact'
-        if self.settings['Enable Triple Bombs']:
+        if self.settings["Enable Impact Bombs"]:
+            spaz.bombType = "impact"
+        if self.settings["Enable Triple Bombs"]:
             spaz.setBombCount(3)
         spaz.addDroppedBombCallback(self._onSpazDroppedBomb)
 
     def _spawnTarget(self):
-
         # gen a few random points; we'll use whichever one is farthest from
         # our existing targets. (dont want overlapping targets)
         points = []
@@ -160,23 +166,21 @@ class TargetPracticeGame(bs.TeamGameActivity):
             return  # could happen if they leave after throwing a bomb..
 
         bullsEye = any(
-            target.doHitAtPosition(pos, player)
-            for target in list(self._targets))
+            target.doHitAtPosition(pos, player) for target in list(self._targets)
+        )
 
         if bullsEye:
-            player.gameData['streak'] += 1
+            player.gameData["streak"] += 1
         else:
-            player.gameData['streak'] = 0
+            player.gameData["streak"] = 0
 
     def _update(self):
-
         # misc. periodic updating..
 
         # clear out targets that have died
         self._targets = [t for t in self._targets if t.exists()]
 
     def handleMessage(self, m):
-
         # when players die, respawn them
         if isinstance(m, bs.PlayerSpazDeathMessage):
             bs.TeamGameActivity.handleMessage(self, m)  # do standard stuff
@@ -190,12 +194,12 @@ class TargetPracticeGame(bs.TeamGameActivity):
 
     def _updateScoreBoard(self):
         for team in self.teams:
-            self._scoreBoard.setTeamValue(team, team.gameData['score'].get())
+            self._scoreBoard.setTeamValue(team, team.gameData["score"].get())
 
     def endGame(self):
         results = bs.TeamGameResults()
         for team in self.teams:
-            results.setTeamScore(team, team.gameData['score'].get())
+            results.setTeamScore(team, team.gameData["score"].get())
         self.end(results)
 
 
@@ -215,40 +219,43 @@ class Target(bs.Actor):
         # isn't too far off from the actual object..
         showInSpace = False
         n1 = bs.newNode(
-            'locator',
+            "locator",
             attrs={
-                'shape': 'circle',
-                'position': position,
-                'color': (0, 1, 0),
-                'opacity': 0.5,
-                'drawBeauty': showInSpace,
-                'additive': True
-            })
+                "shape": "circle",
+                "position": position,
+                "color": (0, 1, 0),
+                "opacity": 0.5,
+                "drawBeauty": showInSpace,
+                "additive": True,
+            },
+        )
         n2 = bs.newNode(
-            'locator',
+            "locator",
             attrs={
-                'shape': 'circleOutline',
-                'position': position,
-                'color': (0, 1, 0),
-                'opacity': 0.3,
-                'drawBeauty': False,
-                'additive': True
-            })
+                "shape": "circleOutline",
+                "position": position,
+                "color": (0, 1, 0),
+                "opacity": 0.3,
+                "drawBeauty": False,
+                "additive": True,
+            },
+        )
         n3 = bs.newNode(
-            'locator',
+            "locator",
             attrs={
-                'shape': 'circleOutline',
-                'position': position,
-                'color': (0, 1, 0),
-                'opacity': 0.1,
-                'drawBeauty': False,
-                'additive': True
-            })
+                "shape": "circleOutline",
+                "position": position,
+                "color": (0, 1, 0),
+                "opacity": 0.1,
+                "drawBeauty": False,
+                "additive": True,
+            },
+        )
         self._nodes = [n1, n2, n3]
-        bs.animateArray(n1, 'size', 1, {0: [0.0], 200: [self._r1 * 2.0]})
-        bs.animateArray(n2, 'size', 1, {50: [0.0], 250: [self._r2 * 2.0]})
-        bs.animateArray(n3, 'size', 1, {100: [0.0], 300: [self._r3 * 2.0]})
-        bs.playSound(bs.getSound('laserReverse'))
+        bs.animateArray(n1, "size", 1, {0: [0.0], 200: [self._r1 * 2.0]})
+        bs.animateArray(n2, "size", 1, {50: [0.0], 250: [self._r2 * 2.0]})
+        bs.animateArray(n3, "size", 1, {100: [0.0], 300: [self._r3 * 2.0]})
+        bs.playSound(bs.getSound("laserReverse"))
 
     def exists(self):
         return True if self._nodes else False
@@ -262,7 +269,7 @@ class Target(bs.Actor):
             bs.Actor.handleMessage(self, m)
 
     def getDistFromPoint(self, pos):
-        'Given a point, returns distance squared from it'
+        "Given a point, returns distance squared from it"
         return (bs.Vector(*pos) - self._position).length()
 
     def doHitAtPosition(self, pos, player):
@@ -272,7 +279,7 @@ class Target(bs.Actor):
         if activity.hasEnded() or self._hit or not self._nodes:
             return 0
 
-        diff = (bs.Vector(*pos) - self._position)
+        diff = bs.Vector(*pos) - self._position
         # disregard y difference (our target point probably isnt exactly
         # on the ground anyway)
         diff[1] = 0.0
@@ -290,34 +297,40 @@ class Target(bs.Actor):
                 bullsEye = True
                 self._nodes[1].color = cDull
                 self._nodes[2].color = cDull
-                bs.animateArray(self._nodes[0], 'color', 3, keys, loop=True)
+                bs.animateArray(self._nodes[0], "color", 3, keys, loop=True)
                 popupScale = 1.8
                 popupColor = (1, 1, 0, 1)
-                streak = player.gameData['streak']
+                streak = player.gameData["streak"]
                 points = 10 + min(20, streak * 2)
-                bs.playSound(bs.getSound('bellHigh'))
+                bs.playSound(bs.getSound("bellHigh"))
                 if streak > 0:
                     bs.playSound(
-                        bs.getSound('orchestraHit4'
-                                    if streak > 3 else 'orchestraHit3'
-                                    if streak > 2 else 'orchestraHit2'
-                                    if streak > 1 else 'orchestraHit'))
+                        bs.getSound(
+                            "orchestraHit4"
+                            if streak > 3
+                            else "orchestraHit3"
+                            if streak > 2
+                            else "orchestraHit2"
+                            if streak > 1
+                            else "orchestraHit"
+                        )
+                    )
             elif dist <= self._r2 + self._rFudge:
                 self._nodes[0].color = cDull
                 self._nodes[2].color = cDull
-                bs.animateArray(self._nodes[1], 'color', 3, keys, loop=True)
+                bs.animateArray(self._nodes[1], "color", 3, keys, loop=True)
                 popupScale = 1.25
                 popupColor = (1, 0.5, 0.2, 1)
                 points = 4
-                bs.playSound(bs.getSound('bellMed'))
+                bs.playSound(bs.getSound("bellMed"))
             else:
                 self._nodes[0].color = cDull
                 self._nodes[1].color = cDull
-                bs.animateArray(self._nodes[2], 'color', 3, keys, loop=True)
+                bs.animateArray(self._nodes[2], "color", 3, keys, loop=True)
                 popupScale = 1.0
                 popupColor = (0.8, 0.3, 0.3, 1)
                 points = 2
-                bs.playSound(bs.getSound('bellLow'))
+                bs.playSound(bs.getSound("bellLow"))
 
             # award points/etc.. (technically should probably leave this up
             # to the activity)
@@ -326,36 +339,31 @@ class Target(bs.Actor):
             # if there's more than 1 player in the game, include their
             # names and colors so they know who got the hit
             if len(activity.players) > 1:
-                popupColor = bs.getSafeColor(
-                    player.color, targetIntensity=0.75)
-                popupStr += ' ' + player.getName()
+                popupColor = bs.getSafeColor(player.color, targetIntensity=0.75)
+                popupStr += " " + player.getName()
             bs.PopupText(
-                popupStr,
-                position=self._position,
-                color=popupColor,
-                scale=popupScale).autoRetain()
+                popupStr, position=self._position, color=popupColor, scale=popupScale
+            ).autoRetain()
 
             # give this player's team points and update the score-board
-            player.getTeam().gameData['score'].add(points)
+            player.getTeam().gameData["score"].add(points)
             activity._updateScoreBoard()
 
             # also give this individual player points
             # (only applies in teams mode)
             activity.scoreSet.playerScored(
-                player, points, showPoints=False, screenMessage=False)
+                player, points, showPoints=False, screenMessage=False
+            )
 
-            bs.animateArray(self._nodes[0], 'size', 1, {
-                800: self._nodes[0].size,
-                1000: [0.0]
-            })
-            bs.animateArray(self._nodes[1], 'size', 1, {
-                850: self._nodes[1].size,
-                1050: [0.0]
-            })
-            bs.animateArray(self._nodes[2], 'size', 1, {
-                900: self._nodes[2].size,
-                1100: [0.0]
-            })
+            bs.animateArray(
+                self._nodes[0], "size", 1, {800: self._nodes[0].size, 1000: [0.0]}
+            )
+            bs.animateArray(
+                self._nodes[1], "size", 1, {850: self._nodes[1].size, 1050: [0.0]}
+            )
+            bs.animateArray(
+                self._nodes[2], "size", 1, {900: self._nodes[2].size, 1100: [0.0]}
+            )
             bs.gameTimer(1100, bs.Call(self.handleMessage, bs.DieMessage()))
 
         return bullsEye

@@ -402,7 +402,6 @@ class PromptSession(Generic[_T]):
         input: Optional[Input] = None,
         output: Optional[Output] = None,
     ) -> None:
-
         history = history or InMemoryHistory()
         clipboard = clipboard or InMemoryClipboard()
 
@@ -482,8 +481,8 @@ class PromptSession(Generic[_T]):
 
         # Create buffers list.
         def accept(buff: Buffer) -> bool:
-            """ Accept the content of the default buffer. This is called when
-            the validation succeeds. """
+            """Accept the content of the default buffer. This is called when
+            the validation succeeds."""
             cast(Application[str], get_app()).exit(result=buff.document.text)
             return True  # Keep text, we call 'reset' later on.
 
@@ -566,7 +565,9 @@ class PromptSession(Generic[_T]):
 
         search_buffer_control = SearchBufferControl(
             buffer=search_buffer,
-            input_processors=[ReverseSearchProcessor(),],
+            input_processors=[
+                ReverseSearchProcessor(),
+            ],
             ignore_case=dyncond("search_ignore_case"),
         )
 
@@ -575,7 +576,7 @@ class PromptSession(Generic[_T]):
         )
 
         def get_search_buffer_control() -> SearchBufferControl:
-            " Return the UIControl to be focused when searching start. "
+            "Return the UIControl to be focused when searching start."
             if is_true(self.multiline):
                 return search_toolbar.control
             else:
@@ -776,7 +777,7 @@ class PromptSession(Generic[_T]):
 
         @handle("enter", filter=do_accept & default_focused)
         def _accept_input(event: E) -> None:
-            " Accept input when enter has been pressed. "
+            "Accept input when enter has been pressed."
             self.default_buffer.validate_and_handle()
 
         @Condition
@@ -785,18 +786,18 @@ class PromptSession(Generic[_T]):
 
         @handle("tab", filter=readline_complete_style & default_focused)
         def _complete_like_readline(event: E) -> None:
-            " Display completions (like Readline). "
+            "Display completions (like Readline)."
             display_completions_like_readline(event)
 
         @handle("c-c", filter=default_focused)
         def _keyboard_interrupt(event: E) -> None:
-            " Abort when Control-C has been pressed. "
+            "Abort when Control-C has been pressed."
             event.app.exit(exception=KeyboardInterrupt, style="class:aborting")
 
         @Condition
         def ctrl_d_condition() -> bool:
-            """ Ctrl-D binding is only active when the default buffer is selected
-            and empty. """
+            """Ctrl-D binding is only active when the default buffer is selected
+            and empty."""
             app = get_app()
             return (
                 app.current_buffer.name == DEFAULT_BUFFER
@@ -805,7 +806,7 @@ class PromptSession(Generic[_T]):
 
         @handle("c-d", filter=ctrl_d_condition & default_focused)
         def _eof(event: E) -> None:
-            " Exit when Control-D has been pressed. "
+            "Exit when Control-D has been pressed."
             event.app.exit(exception=EOFError, style="class:exiting")
 
         suspend_supported = Condition(suspend_to_background_supported)
@@ -1087,7 +1088,6 @@ class PromptSession(Generic[_T]):
         pre_run: Optional[Callable[[], None]] = None,
         set_exception_handler: bool = True,
     ) -> _T:
-
         if message is not None:
             self.message = message
         if editing_mode is not None:
@@ -1270,7 +1270,7 @@ class PromptSession(Generic[_T]):
         return self._get_continuation(prompt_width, line_number, wrap_count)
 
     def _get_arg_text(self) -> StyleAndTextTuples:
-        " 'arg' toolbar, for in multiline mode. "
+        "'arg' toolbar, for in multiline mode."
         arg = self.app.key_processor.arg
         if arg is None:
             # Should not happen because of the `has_arg` filter in the layout.
@@ -1282,7 +1282,7 @@ class PromptSession(Generic[_T]):
         return [("class:arg-toolbar", "Repeat: "), ("class:arg-toolbar.text", arg)]
 
     def _inline_arg(self) -> StyleAndTextTuples:
-        " 'arg' prefix, for in single line mode. "
+        "'arg' prefix, for in single line mode."
         app = get_app()
         if app.key_processor.arg is None:
             return []
@@ -1425,7 +1425,7 @@ def create_confirm_session(
 
     @bindings.add(Keys.Any)
     def _(event: E) -> None:
-        " Disallow inserting other text. "
+        "Disallow inserting other text."
         pass
 
     complete_message = merge_formatted_text([message, suffix])

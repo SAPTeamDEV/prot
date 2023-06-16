@@ -3,6 +3,7 @@ import random
 
 defaultPowerupInterval = 8000
 
+
 class PowerupMessage(object):
     """
     category: Message Classes
@@ -10,9 +11,9 @@ class PowerupMessage(object):
     Tell something to get a powerup.
     This message is normally recieved by touching
     a bs.Powerup box.
-    
+
     Attributes:
-    
+
        powerupType
           The type of powerup to be granted (a string).
           See bs.Powerup.powerupType for available type values.
@@ -23,13 +24,15 @@ class PowerupMessage(object):
           back to the sourceNode to inform it of the fact. This will generally
           cause the powerup box to make a sound and disappear or whatnot.
     """
-    def __init__(self,powerupType,sourceNode=bs.Node(None)):
+
+    def __init__(self, powerupType, sourceNode=bs.Node(None)):
         """
         Instantiate with given values.
         See bs.Powerup.powerupType for available type values.
         """
         self.powerupType = powerupType
         self.sourceNode = sourceNode
+
 
 class PowerupAcceptMessage(object):
     """
@@ -39,15 +42,18 @@ class PowerupAcceptMessage(object):
     This is generally sent in response to a bs.PowerupMessage
     to inform the box (or whoever granted it) that it can go away.
     """
+
     pass
+
 
 class _TouchedMessage(object):
     pass
 
+
 class PowerupFactory(object):
     """
     category: Game Flow Classes
-    
+
     Wraps up media and other resources used by bs.Powerups.
     A single instance of this is shared between all powerups
     and can be retrieved via bs.Powerup.getFactory().
@@ -139,28 +145,31 @@ class PowerupFactory(object):
 
         # pass a powerup-touched message to applicable stuff
         self.powerupMaterial.addActions(
-            conditions=(("theyHaveMaterial",self.powerupAcceptMaterial)),
-            actions=(("modifyPartCollision","collide",True),
-                     ("modifyPartCollision","physical",False),
-                     ("message","ourNode","atConnect",_TouchedMessage())))
+            conditions=(("theyHaveMaterial", self.powerupAcceptMaterial)),
+            actions=(
+                ("modifyPartCollision", "collide", True),
+                ("modifyPartCollision", "physical", False),
+                ("message", "ourNode", "atConnect", _TouchedMessage()),
+            ),
+        )
 
         # we dont wanna be picked up
         self.powerupMaterial.addActions(
-            conditions=("theyHaveMaterial",
-                        bs.getSharedObject('pickupMaterial')),
-            actions=( ("modifyPartCollision","collide",False)))
+            conditions=("theyHaveMaterial", bs.getSharedObject("pickupMaterial")),
+            actions=(("modifyPartCollision", "collide", False)),
+        )
 
         self.powerupMaterial.addActions(
-            conditions=("theyHaveMaterial",
-                        bs.getSharedObject('footingMaterial')),
-            actions=(("impactSound",self.dropSound,0.5,0.1)))
+            conditions=("theyHaveMaterial", bs.getSharedObject("footingMaterial")),
+            actions=(("impactSound", self.dropSound, 0.5, 0.1)),
+        )
 
         self._powerupDist = []
-        for p,freq in getDefaultPowerupDistribution():
+        for p, freq in getDefaultPowerupDistribution():
             for i in range(int(freq)):
                 self._powerupDist.append(p)
 
-    def getRandomPowerupType(self,forceType=None,excludeTypes=[]):
+    def getRandomPowerupType(self, forceType=None, excludeTypes=[]):
         """
         Returns a random powerup type (string).
         See bs.Powerup.powerupType for available type values.
@@ -177,12 +186,11 @@ class PowerupFactory(object):
         else:
             # if the last one was a curse, make this one a health to
             # provide some hope
-            if self._lastPowerupType == 'curse':
-                t = 'health'
+            if self._lastPowerupType == "curse":
+                t = "health"
             else:
                 while True:
-                    t = self._powerupDist[
-                        random.randint(0, len(self._powerupDist)-1)]
+                    t = self._powerupDist[random.randint(0, len(self._powerupDist) - 1)]
                     if t not in excludeTypes:
                         break
         self._lastPowerupType = t
@@ -190,15 +198,18 @@ class PowerupFactory(object):
 
 
 def getDefaultPowerupDistribution():
-    return (('tripleBombs',3),
-            ('iceBombs',3),
-            ('punch',3),
-            ('impactBombs',3),
-            ('landMines',2),
-            ('stickyBombs',3),
-            ('shield',2),
-            ('health',1),
-            ('curse',1))
+    return (
+        ("tripleBombs", 3),
+        ("iceBombs", 3),
+        ("punch", 3),
+        ("impactBombs", 3),
+        ("landMines", 2),
+        ("stickyBombs", 3),
+        ("shield", 2),
+        ("health", 1),
+        ("curse", 1),
+    )
+
 
 class Powerup(bs.Actor):
     """
@@ -219,55 +230,74 @@ class Powerup(bs.Actor):
           The 'prop' bs.Node representing this box.
     """
 
-    def __init__(self,position=(0,1,0),powerupType='tripleBombs',expire=True):
+    def __init__(self, position=(0, 1, 0), powerupType="tripleBombs", expire=True):
         """
         Create a powerup-box of the requested type at the requested position.
 
         see bs.Powerup.powerupType for valid type strings.
         """
-        
+
         bs.Actor.__init__(self)
 
         factory = self.getFactory()
-        self.powerupType = powerupType;
+        self.powerupType = powerupType
         self._powersGiven = False
 
-        if powerupType == 'tripleBombs': tex = factory.texBomb
-        elif powerupType == 'punch': tex = factory.texPunch
-        elif powerupType == 'iceBombs': tex = factory.texIceBombs
-        elif powerupType == 'impactBombs': tex = factory.texImpactBombs
-        elif powerupType == 'landMines': tex = factory.texLandMines
-        elif powerupType == 'stickyBombs': tex = factory.texStickyBombs
-        elif powerupType == 'shield': tex = factory.texShield
-        elif powerupType == 'health': tex = factory.texHealth
-        elif powerupType == 'curse': tex = factory.texCurse
-        else: raise Exception("invalid powerupType: "+str(powerupType))
+        if powerupType == "tripleBombs":
+            tex = factory.texBomb
+        elif powerupType == "punch":
+            tex = factory.texPunch
+        elif powerupType == "iceBombs":
+            tex = factory.texIceBombs
+        elif powerupType == "impactBombs":
+            tex = factory.texImpactBombs
+        elif powerupType == "landMines":
+            tex = factory.texLandMines
+        elif powerupType == "stickyBombs":
+            tex = factory.texStickyBombs
+        elif powerupType == "shield":
+            tex = factory.texShield
+        elif powerupType == "health":
+            tex = factory.texHealth
+        elif powerupType == "curse":
+            tex = factory.texCurse
+        else:
+            raise Exception("invalid powerupType: " + str(powerupType))
 
-        if len(position) != 3: raise Exception("expected 3 floats for position")
-        
+        if len(position) != 3:
+            raise Exception("expected 3 floats for position")
+
         self.node = bs.newNode(
-            'prop',
+            "prop",
             delegate=self,
-            attrs={'body':'box',
-                   'position':position,
-                   'model':factory.model,
-                   'lightModel':factory.modelSimple,
-                   'shadowSize':0.5,
-                   'colorTexture':tex,
-                   'reflection':'powerup',
-                   'reflectionScale':[1.0],
-                   'materials':(factory.powerupMaterial,
-                                bs.getSharedObject('objectMaterial'))})
+            attrs={
+                "body": "box",
+                "position": position,
+                "model": factory.model,
+                "lightModel": factory.modelSimple,
+                "shadowSize": 0.5,
+                "colorTexture": tex,
+                "reflection": "powerup",
+                "reflectionScale": [1.0],
+                "materials": (
+                    factory.powerupMaterial,
+                    bs.getSharedObject("objectMaterial"),
+                ),
+            },
+        )
 
         # animate in..
-        curve = bs.animate(self.node,"modelScale",{0:0,140:1.6,200:1})
-        bs.gameTimer(200,curve.delete)
+        curve = bs.animate(self.node, "modelScale", {0: 0, 140: 1.6, 200: 1})
+        bs.gameTimer(200, curve.delete)
 
         if expire:
-            bs.gameTimer(defaultPowerupInterval-2500,
-                         bs.WeakCall(self._startFlashing))
-            bs.gameTimer(defaultPowerupInterval-1000,
-                         bs.WeakCall(self.handleMessage, bs.DieMessage()))
+            bs.gameTimer(
+                defaultPowerupInterval - 2500, bs.WeakCall(self._startFlashing)
+            )
+            bs.gameTimer(
+                defaultPowerupInterval - 1000,
+                bs.WeakCall(self.handleMessage, bs.DieMessage()),
+            )
 
     @classmethod
     def getFactory(cls):
@@ -275,24 +305,25 @@ class Powerup(bs.Actor):
         Returns a shared bs.PowerupFactory object, creating it if necessary.
         """
         activity = bs.getActivity()
-        if activity is None: raise Exception("no current activity")
-        try: return activity._sharedPowerupFactory
+        if activity is None:
+            raise Exception("no current activity")
+        try:
+            return activity._sharedPowerupFactory
         except Exception:
             f = activity._sharedPowerupFactory = PowerupFactory()
             return f
-            
-    def _startFlashing(self):
-        if self.node.exists(): self.node.flashing = True
 
-        
+    def _startFlashing(self):
+        if self.node.exists():
+            self.node.flashing = True
+
     def handleMessage(self, msg):
         self._handleMessageSanityCheck()
 
         if isinstance(msg, PowerupAcceptMessage):
             factory = self.getFactory()
-            if self.powerupType == 'health':
-                bs.playSound(factory.healthPowerupSound, 3,
-                             position=self.node.position)
+            if self.powerupType == "health":
+                bs.playSound(factory.healthPowerupSound, 3, position=self.node.position)
             bs.playSound(factory.powerupSound, 3, position=self.node.position)
             self._powersGiven = True
             self.handleMessage(bs.DieMessage())
@@ -301,23 +332,24 @@ class Powerup(bs.Actor):
             if not self._powersGiven:
                 node = bs.getCollisionInfo("opposingNode")
                 if node is not None and node.exists():
-                    node.handleMessage(PowerupMessage(self.powerupType,
-                                                      sourceNode=self.node))
+                    node.handleMessage(
+                        PowerupMessage(self.powerupType, sourceNode=self.node)
+                    )
 
         elif isinstance(msg, bs.DieMessage):
             if self.node.exists():
-                if (msg.immediate):
+                if msg.immediate:
                     self.node.delete()
                 else:
-                    curve = bs.animate(self.node, "modelScale", {0:1,100:0})
+                    curve = bs.animate(self.node, "modelScale", {0: 1, 100: 0})
                     bs.gameTimer(100, self.node.delete)
 
-        elif isinstance(msg ,bs.OutOfBoundsMessage):
+        elif isinstance(msg, bs.OutOfBoundsMessage):
             self.handleMessage(bs.DieMessage())
 
         elif isinstance(msg, bs.HitMessage):
             # dont die on punches (thats annoying)
-            if msg.hitType != 'punch':
+            if msg.hitType != "punch":
                 self.handleMessage(bs.DieMessage())
         else:
             bs.Actor.handleMessage(self, msg)

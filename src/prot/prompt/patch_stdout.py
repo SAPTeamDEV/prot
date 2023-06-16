@@ -77,7 +77,6 @@ class StdoutProxy:
     def __init__(
         self, raw: bool = False, original_stdout: Optional[TextIO] = None
     ) -> None:
-
         original_stdout = original_stdout or sys.__stdout__
 
         self.original_stdout = original_stdout

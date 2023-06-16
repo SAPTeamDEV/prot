@@ -39,7 +39,7 @@ def register(name: str) -> Callable[[_T], _T]:
     """
 
     def decorator(handler: _T) -> _T:
-        " `handler` is a callable or Binding. "
+        "`handler` is a callable or Binding."
         if isinstance(handler, Binding):
             _readline_commands[name] = handler
         else:
@@ -115,7 +115,7 @@ def forward_char(event: E) -> None:
 
 @register("backward-char")
 def backward_char(event: E) -> None:
-    " Move back a character. "
+    "Move back a character."
     buff = event.current_buffer
     buff.cursor_position += buff.document.get_cursor_left_position(count=event.arg)
 
@@ -206,7 +206,7 @@ def end_of_history(event: E) -> None:
     """
     Move to the end of the input history, i.e., the line currently being entered.
     """
-    event.current_buffer.history_forward(count=10 ** 100)
+    event.current_buffer.history_forward(count=10**100)
     buff = event.current_buffer
     buff.go_to_history(len(buff._working_lines) - 1)
 
@@ -575,6 +575,7 @@ def print_last_kbd_macro(event: E) -> None:
     """
     Print the last keyboard macro.
     """
+
     # TODO: Make the format suitable for the inputrc file.
     def print_macro() -> None:
         macro = event.app.emacs_state.macro

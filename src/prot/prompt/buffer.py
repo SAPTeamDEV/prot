@@ -56,11 +56,11 @@ __all__ = [
 
 
 class EditReadOnlyBuffer(Exception):
-    " Attempt editing of read-only :class:`.Buffer`. "
+    "Attempt editing of read-only :class:`.Buffer`."
 
 
 class ValidationState(Enum):
-    " The validation state of a buffer. This is set after the validation. "
+    "The validation state of a buffer. This is set after the validation."
     VALID = "VALID"
     INVALID = "INVALID"
     UNKNOWN = "UNKNOWN"
@@ -77,7 +77,6 @@ class CompletionState:
         completions: Optional[List["Completion"]] = None,
         complete_index: Optional[int] = None,
     ):
-
         #: Document as it was when the completion started.
         self.original_document = original_document
 
@@ -149,7 +148,6 @@ class YankNthArgState:
     def __init__(
         self, history_position: int = 0, n: int = -1, previous_inserted_word: str = ""
     ):
-
         self.history_position = history_position
         self.previous_inserted_word = previous_inserted_word
         self.n = n
@@ -246,7 +244,6 @@ class Buffer:
         on_completions_changed: Optional[BufferEventHandler] = None,
         on_suggestion_set: Optional[BufferEventHandler] = None,
     ):
-
         # Accept both filters and booleans as input.
         enable_history_search = to_filter(enable_history_search)
         complete_while_typing = to_filter(complete_while_typing)
@@ -385,7 +382,7 @@ class Buffer:
     # <getters/setters>
 
     def _set_text(self, value: str) -> bool:
-        """ set text at current working_index. Return whether it changed. """
+        """set text at current working_index. Return whether it changed."""
         working_index = self.working_index
         working_lines = self._working_lines
 
@@ -405,7 +402,7 @@ class Buffer:
         return False
 
     def _set_cursor_position(self, value: int) -> bool:
-        """ Set cursor position. Return whether it changed. """
+        """Set cursor position. Return whether it changed."""
         original_position = self.__cursor_position
         self.__cursor_position = max(0, value)
 
@@ -670,7 +667,7 @@ class Buffer:
         self.cursor_position += self.document.get_cursor_right_position(count=count)
 
     def cursor_up(self, count: int = 1) -> None:
-        """ (for multiline edit). Move cursor to the previous line.  """
+        """(for multiline edit). Move cursor to the previous line."""
         original_column = self.preferred_column or self.document.cursor_position_col
         self.cursor_position += self.document.get_cursor_up_position(
             count=count, preferred_column=original_column
@@ -680,7 +677,7 @@ class Buffer:
         self.preferred_column = original_column
 
     def cursor_down(self, count: int = 1) -> None:
-        """ (for multiline edit). Move cursor to the next line.  """
+        """(for multiline edit). Move cursor to the next line."""
         original_column = self.preferred_column or self.document.cursor_position_col
         self.cursor_position += self.document.get_cursor_down_position(
             count=count, preferred_column=original_column
@@ -1663,7 +1660,6 @@ class Buffer:
             insert_common_part: bool = False,
             complete_event: Optional[CompleteEvent] = None,
         ) -> None:
-
             document = self.document
             complete_event = complete_event or CompleteEvent(text_inserted=True)
 
@@ -1676,8 +1672,8 @@ class Buffer:
             self.complete_state = complete_state
 
             def proceed() -> bool:
-                """ Keep retrieving completions. Input text has not yet changed
-                while generating completions. """
+                """Keep retrieving completions. Input text has not yet changed
+                while generating completions."""
                 return self.complete_state == complete_state
 
             async for completion in self.completer.get_completions_async(
@@ -1863,7 +1859,7 @@ def _only_one_at_a_time(coroutine: _T) -> _T:
 
 
 class _Retry(Exception):
-    " Retry in `_only_one_at_a_time`. "
+    "Retry in `_only_one_at_a_time`."
 
 
 def indent(buffer: Buffer, from_row: int, to_row: int, count: int = 1) -> None:

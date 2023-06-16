@@ -150,13 +150,13 @@ def is_multiline() -> bool:
 
 @Condition
 def has_validation_error() -> bool:
-    " Current buffer has validation error.  "
+    "Current buffer has validation error."
     return get_app().current_buffer.validation_error is not None
 
 
 @Condition
 def has_arg() -> bool:
-    " Enable when the input processor has an 'arg'. "
+    "Enable when the input processor has an 'arg'."
     return get_app().key_processor.arg is not None
 
 
@@ -315,7 +315,7 @@ def vi_digraph_mode() -> bool:
 
 @Condition
 def vi_recording_macro() -> bool:
-    " When recording a Vi macro. "
+    "When recording a Vi macro."
     app = get_app()
     if app.editing_mode != EditingMode.VI:
         return False
@@ -325,7 +325,7 @@ def vi_recording_macro() -> bool:
 
 @Condition
 def emacs_mode() -> bool:
-    " When the Emacs bindings are active. "
+    "When the Emacs bindings are active."
     return get_app().editing_mode == EditingMode.EMACS
 
 
@@ -360,14 +360,14 @@ def shift_selection_mode() -> bool:
 
 @Condition
 def is_searching() -> bool:
-    " When we are searching. "
+    "When we are searching."
     app = get_app()
     return app.layout.is_searching
 
 
 @Condition
 def control_is_searchable() -> bool:
-    " When the current UIControl is searchable. "
+    "When the current UIControl is searchable."
     from prot.prompt.layout.controls import BufferControl
 
     control = get_app().layout.current_control
@@ -379,5 +379,5 @@ def control_is_searchable() -> bool:
 
 @Condition
 def vi_search_direction_reversed() -> bool:
-    " When the '/' and '?' key bindings for Vi-style searching have been reversed. "
+    "When the '/' and '?' key bindings for Vi-style searching have been reversed."
     return get_app().reverse_vi_search_direction()

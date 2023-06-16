@@ -5,4 +5,4 @@ from . import bsMap
 from . import bsPro
 from . import bsSpaz
 
-__version__ = '1.1'
+__version__ = "1.1"

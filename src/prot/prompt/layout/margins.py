@@ -76,7 +76,6 @@ class NumberedMargin(Margin):
     def __init__(
         self, relative: FilterOrBool = False, display_tildes: FilterOrBool = False
     ) -> None:
-
         self.relative = to_filter(relative)
         self.display_tildes = to_filter(display_tildes)
 
@@ -169,7 +168,6 @@ class ScrollbarMargin(Margin):
         up_arrow_symbol: str = "^",
         down_arrow_symbol: str = "v",
     ) -> None:
-
         self.display_arrows = to_filter(display_arrows)
         self.up_arrow_symbol = up_arrow_symbol
         self.down_arrow_symbol = down_arrow_symbol
@@ -202,7 +200,7 @@ class ScrollbarMargin(Margin):
         else:
 
             def is_scroll_button(row: int) -> bool:
-                " True if we should display a button on this row. "
+                "True if we should display a button on this row."
                 return scrollbar_top <= row <= scrollbar_top + scrollbar_height
 
             # Up arrow.
@@ -272,12 +270,11 @@ class PromptMargin(Margin):
             Callable[[int, int, bool], StyleAndTextTuples]
         ] = None,
     ) -> None:
-
         self.get_prompt = get_prompt
         self.get_continuation = get_continuation
 
     def get_width(self, get_ui_content: Callable[[], UIContent]) -> int:
-        " Width to report to the `Window`. "
+        "Width to report to the `Window`."
         # Take the width from the first line.
         text = fragment_list_to_text(self.get_prompt())
         return get_cwidth(text)

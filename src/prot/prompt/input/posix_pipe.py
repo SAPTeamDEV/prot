@@ -48,7 +48,7 @@ class PosixPipeInput(Vt100Input):
         os.write(self._w, data)
 
     def send_text(self, data: str) -> None:
-        " Send text to the input. "
+        "Send text to the input."
         os.write(self._w, data.encode("utf-8"))
 
     def raw_mode(self) -> ContextManager[None]:
@@ -58,7 +58,7 @@ class PosixPipeInput(Vt100Input):
         return DummyContext()
 
     def close(self) -> None:
-        " Close pipe fds. "
+        "Close pipe fds."
         os.close(self._r)
         os.close(self._w)
 

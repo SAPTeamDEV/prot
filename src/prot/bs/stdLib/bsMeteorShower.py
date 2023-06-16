@@ -12,51 +12,67 @@ def bsGetGames():
 
 
 def bsGetLevels():
-    return [bs.Level('Meteor Shower', displayName='${GAME}',
-                     gameType=MeteorShowerGame,
-                     settings={}, previewTexName='rampagePreview'),
-            bs.Level('Epic Meteor Shower', displayName='${GAME}',
-                     gameType=MeteorShowerGame,
-                     settings={'Epic Mode': True},
-                     previewTexName='rampagePreview')]
+    return [
+        bs.Level(
+            "Meteor Shower",
+            displayName="${GAME}",
+            gameType=MeteorShowerGame,
+            settings={},
+            previewTexName="rampagePreview",
+        ),
+        bs.Level(
+            "Epic Meteor Shower",
+            displayName="${GAME}",
+            gameType=MeteorShowerGame,
+            settings={"Epic Mode": True},
+            previewTexName="rampagePreview",
+        ),
+    ]
 
 
 class MeteorShowerGame(bs.TeamGameActivity):
-
     @classmethod
     def getName(cls):
-        return 'Meteor Shower'
+        return "Meteor Shower"
 
     @classmethod
     def getScoreInfo(cls):
-        return {'scoreName': 'Survived',
-                'scoreType': 'milliseconds',
-                'scoreVersion': 'B'}
+        return {
+            "scoreName": "Survived",
+            "scoreType": "milliseconds",
+            "scoreVersion": "B",
+        }
 
     @classmethod
     def getDescription(cls, sessionType):
-        return 'Dodge the falling bombs.'
+        return "Dodge the falling bombs."
 
     # we're currently hard-coded for one map..
     @classmethod
     def getSupportedMaps(cls, sessionType):
-        return ['Rampage']
+        return ["Rampage"]
 
     @classmethod
     def getSettings(cls, sessionType):
-        return [("Epic Mode", {'default': False})]
+        return [("Epic Mode", {"default": False})]
 
     # we support teams, free-for-all, and co-op sessions
     @classmethod
     def supportsSessionType(cls, sessionType):
-        return True if (issubclass(sessionType, bs.TeamsSession)
-                        or issubclass(sessionType, bs.FreeForAllSession)
-                        or issubclass(sessionType, bs.CoopSession)) else False
+        return (
+            True
+            if (
+                issubclass(sessionType, bs.TeamsSession)
+                or issubclass(sessionType, bs.FreeForAllSession)
+                or issubclass(sessionType, bs.CoopSession)
+            )
+            else False
+        )
 
     def __init__(self, settings):
         bs.TeamGameActivity.__init__(self, settings)
 
-        if self.settings['Epic Mode']:
+        if self.settings["Epic Mode"]:
             self._isSlowMotion = True
 
         # print messages when players die (since its meaningful in this game)
@@ -68,12 +84,12 @@ class MeteorShowerGame(bs.TeamGameActivity):
     # ..we can go ahead and set our music and whatnot
     def onTransitionIn(self):
         bs.TeamGameActivity.onTransitionIn(
-            self, music='Epic' if self.settings['Epic Mode'] else 'Survival')
+            self, music="Epic" if self.settings["Epic Mode"] else "Survival"
+        )
 
     # called when our game actually starts
 
     def onBegin(self):
-
         bs.TeamGameActivity.onBegin(self)
 
         # drop a wave every few seconds.. and every so often drop the time
@@ -81,13 +97,13 @@ class MeteorShowerGame(bs.TeamGameActivity):
         # players
         self._meteorTime = 2000
         t = 5000 if len(self.players) > 2 else 2500
-        if self.settings['Epic Mode']:
+        if self.settings["Epic Mode"]:
             t /= 4
         bs.gameTimer(t, self._decrementMeteorTime, repeat=True)
 
         # kick off the first wave in a few seconds
         t = 3000
-        if self.settings['Epic Mode']:
+        if self.settings["Epic Mode"]:
             t /= 4
         bs.gameTimer(t, self._setMeteorTimer)
 
@@ -103,17 +119,19 @@ class MeteorShowerGame(bs.TeamGameActivity):
         if self.hasBegun():
             bs.screenMessage(
                 bs.Lstr(
-                    resource='playerDelayedJoinText',
-                    subs=[('${PLAYER}', player.getName(full=True))]),
-                color=(0, 1, 0))
+                    resource="playerDelayedJoinText",
+                    subs=[("${PLAYER}", player.getName(full=True))],
+                ),
+                color=(0, 1, 0),
+            )
             # for score purposes, mark them as having died right as the
             # game started
-            player.gameData['deathTime'] = self._timer.getStartTime()
+            player.gameData["deathTime"] = self._timer.getStartTime()
             return
         self.spawnPlayer(player)
 
     def onPlayerLeave(self, player):
-         # augment default behavior...
+        # augment default behavior...
         bs.TeamGameActivity.onPlayerLeave(self, player)
         # a departing player may trigger game-over
         self._checkEndGame()
@@ -121,30 +139,26 @@ class MeteorShowerGame(bs.TeamGameActivity):
     # overriding the default character spawning..
 
     def spawnPlayer(self, player):
-
         spaz = self.spawnPlayerSpaz(player)
 
         # lets reconnect this player's controls to this
         # spaz but *without* the ability to attack or pick stuff up
-        spaz.connectControlsToPlayer(enablePunch=False,
-                                     enableBomb=False,
-                                     enablePickUp=False)
+        spaz.connectControlsToPlayer(
+            enablePunch=False, enableBomb=False, enablePickUp=False
+        )
 
         # also lets have them make some noise when they die..
         spaz.playBigDeathSound = True
 
     # various high-level game events come through this method
     def handleMessage(self, m):
-
         if isinstance(m, bs.PlayerSpazDeathMessage):
-
-            bs.TeamGameActivity.handleMessage(
-                self, m)  # (augment standard behavior)
+            bs.TeamGameActivity.handleMessage(self, m)  # (augment standard behavior)
 
             deathTime = bs.getGameTime()
 
             # record the player's moment of death
-            m.spaz.getPlayer().gameData['deathTime'] = deathTime
+            m.spaz.getPlayer().gameData["deathTime"] = deathTime
 
             # in co-op mode, end the game the instant everyone dies
             # (more accurate looking)
@@ -182,27 +196,29 @@ class MeteorShowerGame(bs.TeamGameActivity):
 
     def _setMeteorTimer(self):
         bs.gameTimer(
-            int((1.0 + 0.2 * random.random()) * self._meteorTime),
-            self._dropBombCluster)
+            int((1.0 + 0.2 * random.random()) * self._meteorTime), self._dropBombCluster
+        )
 
     def _dropBombCluster(self):
-
         # random note: code like this is a handy way to plot out extents
         # and debug things
         if False:
-            bs.newNode('locator', attrs={'position': (8, 6, -5.5)})
-            bs.newNode('locator', attrs={'position': (8, 6, -2.3)})
-            bs.newNode('locator', attrs={'position': (-7.3, 6, -5.5)})
-            bs.newNode('locator', attrs={'position': (-7.3, 6, -2.3)})
+            bs.newNode("locator", attrs={"position": (8, 6, -5.5)})
+            bs.newNode("locator", attrs={"position": (8, 6, -2.3)})
+            bs.newNode("locator", attrs={"position": (-7.3, 6, -5.5)})
+            bs.newNode("locator", attrs={"position": (-7.3, 6, -2.3)})
 
         # drop several bombs in series..
         delay = 0
         for i in range(random.randrange(1, 3)):
             # drop them somewhere within our bounds with velocity pointing
             # toward the opposite side
-            pos = (-7.3+15.3*random.random(), 11, -5.5+2.1*random.random())
-            vel = ((-5.0+random.random()*30.0)
-                   * (-1.0 if pos[0] > 0 else 1.0), -4.0, 0)
+            pos = (-7.3 + 15.3 * random.random(), 11, -5.5 + 2.1 * random.random())
+            vel = (
+                (-5.0 + random.random() * 30.0) * (-1.0 if pos[0] > 0 else 1.0),
+                -4.0,
+                0,
+            )
             bs.gameTimer(delay, bs.Call(self._dropBomb, pos, vel))
             delay += 100
         self._setMeteorTimer()
@@ -211,10 +227,9 @@ class MeteorShowerGame(bs.TeamGameActivity):
         b = bs.Bomb(position=position, velocity=velocity).autoRetain()
 
     def _decrementMeteorTime(self):
-        self._meteorTime = max(10, int(self._meteorTime*0.9))
+        self._meteorTime = max(10, int(self._meteorTime * 0.9))
 
     def endGame(self):
-
         curTime = bs.getGameTime()
 
         # mark 'death-time' as now for any still-living players
@@ -222,18 +237,18 @@ class MeteorShowerGame(bs.TeamGameActivity):
         # (these per-player scores are only meaningful in team-games)
         for team in self.teams:
             for player in team.players:
-
                 # throw an extra fudge factor +1 in so teams that
                 # didn't die come out ahead of teams that did
-                if 'deathTime' not in player.gameData:
-                    player.gameData['deathTime'] = curTime+1
+                if "deathTime" not in player.gameData:
+                    player.gameData["deathTime"] = curTime + 1
 
                 # award a per-player score depending on how many seconds
                 # they lasted (per-player scores only affect teams mode;
                 # everywhere else just looks at the per-team score)
-                score = (player.gameData['deathTime']
-                         -self._timer.getStartTime())/1000
-                if 'deathTime' not in player.gameData:
+                score = (
+                    player.gameData["deathTime"] - self._timer.getStartTime()
+                ) / 1000
+                if "deathTime" not in player.gameData:
                     score += 50  # a bit extra for survivors
                 self.scoreSet.playerScored(player, score, screenMessage=False)
 
@@ -249,14 +264,14 @@ class MeteorShowerGame(bs.TeamGameActivity):
         # of 'teams' mode where each player gets their own team, so we can
         # just always deal in teams and have all cases covered
         for team in self.teams:
-
             # set the team score to the max time survived by any player on
             # that team
             longestLife = 0
             for player in team.players:
                 longestLife = max(
                     longestLife,
-                    (player.gameData['deathTime'] - self._timer.getStartTime()))
+                    (player.gameData["deathTime"] - self._timer.getStartTime()),
+                )
             results.setTeamScore(team, longestLife)
 
         self.end(results=results)

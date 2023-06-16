@@ -87,7 +87,6 @@ class CompletionsMenuControl(UIControl):
         wrap_lines: bool,
         get_line_prefix: Optional[GetLinePrefixCallable],
     ) -> Optional[int]:
-
         complete_state = get_app().current_buffer.complete_state
         if complete_state:
             return len(complete_state.completions)
@@ -169,7 +168,6 @@ class CompletionsMenuControl(UIControl):
     def _get_menu_item_meta_fragments(
         self, completion: Completion, is_current_completion: bool, width: int
     ) -> StyleAndTextTuples:
-
         if is_current_completion:
             style_str = "class:completion-menu.meta.completion.current"
         else:
@@ -275,9 +273,8 @@ class CompletionsMenu(ConditionalContainer):
         scroll_offset: Union[int, Callable[[], int]] = 0,
         extra_filter: FilterOrBool = True,
         display_arrows: FilterOrBool = False,
-        z_index: int = 10 ** 8,
+        z_index: int = 10**8,
     ) -> None:
-
         extra_filter = to_filter(extra_filter)
         display_arrows = to_filter(display_arrows)
 
@@ -405,12 +402,12 @@ class MultiColumnCompletionMenuControl(UIControl):
         def grouper(
             n: int, iterable: Iterable[_T], fillvalue: Optional[_T] = None
         ) -> Iterable[List[_T]]:
-            " grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx "
+            "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
             args = [iter(iterable)] * n
             return zip_longest(fillvalue=fillvalue, *args)
 
         def is_current_completion(completion: Completion) -> bool:
-            " Returns True when this completion is the currently selected one. "
+            "Returns True when this completion is the currently selected one."
             return (
                 complete_state is not None
                 and complete_state.complete_index is not None
@@ -567,7 +564,7 @@ class MultiColumnCompletionMenuControl(UIControl):
 
         @Condition
         def filter() -> bool:
-            " Only handle key bindings if this menu is visible. "
+            "Only handle key bindings if this menu is visible."
             app = get_app()
             complete_state = app.current_buffer.complete_state
 
@@ -620,9 +617,8 @@ class MultiColumnCompletionsMenu(HSplit):
         suggested_max_column_width: int = 30,
         show_meta: FilterOrBool = True,
         extra_filter: FilterOrBool = True,
-        z_index: int = 10 ** 8,
+        z_index: int = 10**8,
     ) -> None:
-
         show_meta = to_filter(show_meta)
         extra_filter = to_filter(extra_filter)
 

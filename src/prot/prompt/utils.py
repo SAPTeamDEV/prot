@@ -68,12 +68,12 @@ class Event(Generic[_Sender]):
             self += handler
 
     def __call__(self) -> None:
-        " Fire event. "
+        "Fire event."
         for handler in self._handlers:
             handler(self.sender)
 
     def fire(self) -> None:
-        " Alias for just calling the event. "
+        "Alias for just calling the event."
         self()
 
     def add_handler(self, handler: Callable[[_Sender], None]) -> None:
@@ -210,7 +210,7 @@ def in_main_thread() -> bool:
 
 
 def get_term_environment_variable() -> str:
-    " Return the $TERM environment variable. "
+    "Return the $TERM environment variable."
     return os.environ.get("TERM", "")
 
 
@@ -272,7 +272,7 @@ def take_using_weights(
 
 
 def to_str(value: Union[Callable[[], str], str]) -> str:
-    " Turn callable or string into string. "
+    "Turn callable or string into string."
     if callable(value):
         return to_str(value())
     else:
@@ -280,7 +280,7 @@ def to_str(value: Union[Callable[[], str], str]) -> str:
 
 
 def to_int(value: Union[Callable[[], int], int]) -> int:
-    " Turn callable or int into int. "
+    "Turn callable or int into int."
     if callable(value):
         return to_int(value())
     else:
@@ -291,7 +291,7 @@ AnyFloat = Union[Callable[[], float], float]
 
 
 def to_float(value: AnyFloat) -> float:
-    " Turn callable or float into float. "
+    "Turn callable or float into float."
     if callable(value):
         return to_float(value())
     else:

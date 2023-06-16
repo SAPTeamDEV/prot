@@ -70,7 +70,6 @@ class TextObject:
     def __init__(
         self, start: int, end: int = 0, type: TextObjectType = TextObjectType.EXCLUSIVE
     ):
-
         self.start = start
         self.end = end
         self.type = type
@@ -486,8 +485,8 @@ def load_vi_bindings() -> KeyBindingsBase:
         """
         In navigation-mode, move cursor.
         """
-        event.current_buffer.cursor_position += event.current_buffer.document.get_cursor_left_position(
-            count=event.arg
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_cursor_left_position(count=event.arg)
         )
 
     @handle("c-n", filter=vi_insert_mode)
@@ -673,8 +672,10 @@ def load_vi_bindings() -> KeyBindingsBase:
     @handle("I", filter=vi_navigation_mode & ~is_read_only)
     def _I(event: E) -> None:
         event.app.vi_state.input_mode = InputMode.INSERT
-        event.current_buffer.cursor_position += event.current_buffer.document.get_start_of_line_position(
-            after_whitespace=True
+        event.current_buffer.cursor_position += (
+            event.current_buffer.document.get_start_of_line_position(
+                after_whitespace=True
+            )
         )
 
     @Condition
@@ -1313,7 +1314,7 @@ def load_vi_bindings() -> KeyBindingsBase:
 
     @text_object("^")
     def _start_of_line(event: E) -> TextObject:
-        """ 'c^', 'd^' and '^': Soft start of line, after whitespace. """
+        """'c^', 'd^' and '^': Soft start of line, after whitespace."""
         return TextObject(
             event.current_buffer.document.get_start_of_line_position(
                 after_whitespace=True
@@ -2168,7 +2169,7 @@ def load_vi_search_bindings() -> KeyBindingsBase:
 
     @Condition
     def search_buffer_is_empty() -> bool:
-        " Returns True when the search buffer is empty. "
+        "Returns True when the search buffer is empty."
         return get_app().current_buffer.text == ""
 
     # Vi-style forward search.

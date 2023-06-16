@@ -105,7 +105,6 @@ class TransformationInput:
         width: int,
         height: int,
     ) -> None:
-
         self.buffer_control = buffer_control
         self.document = document
         self.lineno = lineno
@@ -151,7 +150,6 @@ class Transformation:
         source_to_display: Optional[SourceToDisplay] = None,
         display_to_source: Optional[DisplayToSource] = None,
     ) -> None:
-
         self.fragments = fragments
         self.source_to_display = source_to_display or (lambda i: i)
         self.display_to_source = display_to_source or (lambda i: i)
@@ -189,7 +187,6 @@ class HighlightSearchProcessor(Processor):
     def apply_transformation(
         self, transformation_input: TransformationInput
     ) -> Transformation:
-
         (
             buffer_control,
             document,
@@ -400,7 +397,6 @@ class HighlightMatchingBracketProcessor(Processor):
     def apply_transformation(
         self, transformation_input: TransformationInput
     ) -> Transformation:
-
         (
             buffer_control,
             document,
@@ -447,7 +443,6 @@ class DisplayMultipleCursors(Processor):
     def apply_transformation(
         self, transformation_input: TransformationInput
     ) -> Transformation:
-
         (
             buffer_control,
             document,
@@ -703,7 +698,6 @@ class TabsProcessor(Processor):
         char2: Union[str, Callable[[], str]] = "\u2508",
         style: str = "class:tab",
     ) -> None:
-
         self.char1 = char1
         self.char2 = char2
         self.tabstop = tabstop
@@ -747,11 +741,11 @@ class TabsProcessor(Processor):
         position_mappings[len(fragments) + 1] = pos + 1
 
         def source_to_display(from_position: int) -> int:
-            " Maps original cursor position to the new one. "
+            "Maps original cursor position to the new one."
             return position_mappings[from_position]
 
         def display_to_source(display_pos: int) -> int:
-            " Maps display cursor position to the original one. "
+            "Maps display cursor position to the original one."
             position_mappings_reversed = {v: k for k, v in position_mappings.items()}
 
             while display_pos >= 0:
@@ -807,8 +801,8 @@ class ReverseSearchProcessor(Processor):
         excluded_processors = tuple(self._excluded_input_processors)
 
         def filter_processor(item: Processor) -> Optional[Processor]:
-            """ Filter processors from the main control that we want to disable
-            here. This returns either an accepted processor or None. """
+            """Filter processors from the main control that we want to disable
+            here. This returns either an accepted processor or None."""
             # For a `_MergedProcessor`, check each individual processor, recursively.
             if isinstance(item, _MergedProcessor):
                 accepted_processors = [filter_processor(p) for p in item.processors]
@@ -990,8 +984,8 @@ class _MergedProcessor(Processor):
         fragments = ti.fragments
 
         def source_to_display(i: int) -> int:
-            """ Translate x position from the buffer to the x position in the
-            processor fragments list. """
+            """Translate x position from the buffer to the x position in the
+            processor fragments list."""
             for f in source_to_display_functions:
                 i = f(i)
             return i

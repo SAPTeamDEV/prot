@@ -85,13 +85,13 @@ def _output_screen_diff(
     output.hide_cursor()
 
     def reset_attributes() -> None:
-        " Wrapper around Output.reset_attributes. "
+        "Wrapper around Output.reset_attributes."
         nonlocal last_style
         _output_reset_attributes()
         last_style = None  # Forget last char after resetting attributes.
 
     def move_cursor(new: Point) -> Point:
-        " Move cursor to this `new` point. Returns the given Point. "
+        "Move cursor to this `new` point. Returns the given Point."
         current_x, current_y = current_pos.x, current_pos.y
 
         if new.y > current_y:
@@ -244,7 +244,7 @@ def _output_screen_diff(
 
 
 class HeightIsUnknownError(Exception):
-    " Information unavailable. Did not yet receive the CPR response. "
+    "Information unavailable. Did not yet receive the CPR response."
 
 
 class _StyleStringToAttrsCache(Dict[str, Attrs]):
@@ -258,7 +258,6 @@ class _StyleStringToAttrsCache(Dict[str, Attrs]):
         get_attrs_for_style_str: Callable[["str"], Attrs],
         style_transformation: StyleTransformation,
     ) -> None:
-
         self.get_attrs_for_style_str = get_attrs_for_style_str
         self.style_transformation = style_transformation
 
@@ -271,7 +270,7 @@ class _StyleStringToAttrsCache(Dict[str, Attrs]):
 
 
 class CPR_Support(Enum):
-    " Enum: whether or not CPR is supported. "
+    "Enum: whether or not CPR is supported."
     SUPPORTED = "SUPPORTED"
     NOT_SUPPORTED = "NOT_SUPPORTED"
     UNKNOWN = "UNKNOWN"
@@ -299,7 +298,6 @@ class Renderer:
         mouse_support: FilterOrBool = False,
         cpr_not_supported_callback: Optional[Callable[[], None]] = None,
     ) -> None:
-
         self.style = style
         self.output = output
         self.input = input
@@ -326,7 +324,6 @@ class Renderer:
         self.reset(_scroll=True)
 
     def reset(self, _scroll: bool = False, leave_alternate_screen: bool = True) -> None:
-
         # Reset position
         self._cursor_pos = Point(x=0, y=0)
 
@@ -598,7 +595,12 @@ class Renderer:
         layout.container.write_to_screen(
             screen,
             mouse_handlers,
-            WritePosition(xpos=0, ypos=0, width=size.columns, height=height,),
+            WritePosition(
+                xpos=0,
+                ypos=0,
+                width=size.columns,
+                height=height,
+            ),
             parent_style="",
             erase_bg=False,
             z_index=None,

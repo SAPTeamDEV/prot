@@ -92,7 +92,7 @@ E = KeyPressEvent
 
 
 class Border:
-    " Box drawing characters. (Thin) "
+    "Box drawing characters. (Thin)"
     HORIZONTAL = "\u2500"
     VERTICAL = "\u2502"
     TOP_LEFT = "\u250c"
@@ -188,7 +188,6 @@ class TextArea:
         prompt: AnyFormattedText = "",
         input_processors: Optional[List[Processor]] = None,
     ) -> None:
-
         if search_field is None:
             search_control = None
         elif isinstance(search_field, SearchToolbar):
@@ -322,7 +321,6 @@ class Label:
         dont_extend_height: bool = True,
         dont_extend_width: bool = False,
     ) -> None:
-
         self.text = text
 
         def get_width() -> AnyDimension:
@@ -363,7 +361,6 @@ class Button:
     def __init__(
         self, text: str, handler: Optional[Callable[[], None]] = None, width: int = 12
     ) -> None:
-
         self.text = text
         self.handler = handler
         self.width = width
@@ -407,7 +404,7 @@ class Button:
         ]
 
     def _get_key_bindings(self) -> KeyBindings:
-        " Key bindings for the Button. "
+        "Key bindings for the Button."
         kb = KeyBindings()
 
         @kb.add(" ")
@@ -444,7 +441,6 @@ class Frame:
         key_bindings: Optional[KeyBindings] = None,
         modal: bool = False,
     ) -> None:
-
         self.title = title
         self.body = body
 
@@ -586,7 +582,6 @@ class Box:
         modal: bool = False,
         key_bindings: Optional[KeyBindings] = None,
     ) -> None:
-
         if padding is None:
             padding = D(preferred=0)
 
@@ -702,7 +697,9 @@ class _DialogList(Generic[_T]):
         self.window = Window(
             content=self.control,
             style=self.container_style,
-            right_margins=[ScrollbarMargin(display_arrows=True),],
+            right_margins=[
+                ScrollbarMargin(display_arrows=True),
+            ],
             dont_extend_height=True,
         )
 

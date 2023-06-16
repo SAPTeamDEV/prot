@@ -5,6 +5,7 @@ import builtins as _builtins
 maps = {}
 depends = []
 
+
 class Map(object):
     name = "Map"
 
@@ -24,16 +25,19 @@ class Map(object):
         """
         return None
 
+
 def registerMap(map):
     if not map.name in maps:
         maps[map.name] = map
     else:
-        raise Exception(repr(map.name) + 'already exists.')
+        raise Exception(repr(map.name) + "already exists.")
+
 
 def _import(*args, **kwargs):
     depends.append(args[0])
     if _import.redirect:
         return _builtins.__import(*args, **kwargs)
+
 
 def record(redirect=False):
     if redirect:
@@ -43,10 +47,12 @@ def record(redirect=False):
     _builtins.__import = _builtins.__import__
     _builtins.__import__ = _import
 
+
 def end():
     _builtins.__import__ = _builtins.__import
     del _builtins.__import
     del _import.redirect
+
 
 def clear():
     global maps
@@ -54,14 +60,15 @@ def clear():
     maps = {}
     depends = []
 
-def getMedia(path='.', divide=False, silent=False):
+
+def getMedia(path=".", divide=False, silent=False):
     tree = bs.makeTree(path)
     data = {}
     for name, obj in maps.items():
         medias = []
         preloads = []
         if obj.getPreviewTextureName() is not None:
-            medias += bs.getFiles(obj.getPreviewTextureName(), path, ['ktx', 'dds'])
+            medias += bs.getFiles(obj.getPreviewTextureName(), path, ["ktx", "dds"])
         if obj.onPreload() is not None:
             for key, value in obj.onPreload().items():
                 if type(value) == str:
@@ -69,12 +76,12 @@ def getMedia(path='.', divide=False, silent=False):
                 elif type(value) in [list, tuple]:
                     preloads += list(value)
         for preload in preloads:
-            if preload.endswith('.texture'):
-                medias += bs.getFiles(preload.split('.')[0], path, ['ktx', 'dds'])
+            if preload.endswith(".texture"):
+                medias += bs.getFiles(preload.split(".")[0], path, ["ktx", "dds"])
             else:
                 medias.append(preload)
         for depend in depends:
-            medias += bs.getFiles(depend, path, ['py', 'pyc'])
+            medias += bs.getFiles(depend, path, ["py", "pyc"])
         data[name] = [ProtString(media) for media in medias]
 
     if data:

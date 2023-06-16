@@ -170,14 +170,14 @@ AnyContainer = Union[Container, "MagicContainer"]
 
 
 def _window_too_small() -> "Window":
-    " Create a `Window` that displays the 'Window too small' text. "
+    "Create a `Window` that displays the 'Window too small' text."
     return Window(
         FormattedTextControl(text=[("class:window-too-small", " Window too small... ")])
     )
 
 
 class VerticalAlign(Enum):
-    " Alignment for `HSplit`. "
+    "Alignment for `HSplit`."
     TOP = "TOP"
     CENTER = "CENTER"
     BOTTOM = "BOTTOM"
@@ -185,7 +185,7 @@ class VerticalAlign(Enum):
 
 
 class HorizontalAlign(Enum):
-    " Alignment for `VSplit`. "
+    "Alignment for `VSplit`."
     LEFT = "LEFT"
     CENTER = "CENTER"
     RIGHT = "RIGHT"
@@ -211,7 +211,6 @@ class _Split(Container):
         key_bindings: Optional[KeyBindingsBase] = None,
         style: Union[str, Callable[[], str]] = "",
     ) -> None:
-
         self.children = [to_container(c) for c in children]
         self.window_too_small = window_too_small or _window_too_small()
         self.padding = padding
@@ -285,7 +284,6 @@ class HSplit(_Split):
         key_bindings: Optional[KeyBindingsBase] = None,
         style: Union[str, Callable[[], str]] = "",
     ) -> None:
-
         super().__init__(
             children=children,
             window_too_small=window_too_small,
@@ -522,7 +520,6 @@ class VSplit(_Split):
         key_bindings: Optional[KeyBindingsBase] = None,
         style: Union[str, Callable[[], str]] = "",
     ) -> None:
-
         super().__init__(
             children=children,
             window_too_small=window_too_small,
@@ -765,7 +762,6 @@ class FloatContainer(Container):
         style: Union[str, Callable[[], str]] = "",
         z_index: Optional[int] = None,
     ) -> None:
-
         self.content = to_container(content)
         self.floats = floats
 
@@ -822,7 +818,7 @@ class FloatContainer(Container):
 
             if postpone:
                 new_z_index = (
-                    number + 10 ** 8
+                    number + 10**8
                 )  # Draw as late as possible, but keep the order.
                 screen.draw_with_z_index(
                     z_index=new_z_index,
@@ -858,7 +854,7 @@ class FloatContainer(Container):
         erase_bg: bool,
         z_index: Optional[int],
     ) -> None:
-        " Draw a single Float. "
+        "Draw a single Float."
         # When a menu_position was given, use this instead of the cursor
         # position. (These cursor positions are absolute, translate again
         # relative to the write_position.)
@@ -1065,7 +1061,6 @@ class Float:
         z_index: int = 1,
         transparent: bool = False,
     ):
-
         assert z_index >= 1
 
         self.left = left
@@ -1145,7 +1140,6 @@ class WindowRenderInfo:
         y_offset: int,
         wrap_lines: bool,
     ) -> None:
-
         self.window = window
         self.ui_content = ui_content
         self.vertical_scroll = vertical_scroll
@@ -1338,7 +1332,6 @@ class ScrollOffsets:
         left: Union[int, Callable[[], int]] = 0,
         right: Union[int, Callable[[], int]] = 0,
     ) -> None:
-
         self._top = top
         self._bottom = bottom
         self._left = left
@@ -1486,7 +1479,6 @@ class Window(Container):
         char: Union[None, str, Callable[[], str]] = None,
         get_line_prefix: Optional[GetLinePrefixCallable] = None,
     ) -> None:
-
         self.allow_scroll_beyond_bottom = to_filter(allow_scroll_beyond_bottom)
         self.always_hide_cursor = to_filter(always_hide_cursor)
         self.wrap_lines = to_filter(wrap_lines)
@@ -1547,6 +1539,7 @@ class Window(Container):
         Return the width for this margin.
         (Calculate only once per render time.)
         """
+
         # Margin.get_width, needs to have a UIContent instance.
         def get_ui_content() -> UIContent:
             return self._get_ui_content(width=0, height=0)
@@ -1571,8 +1564,8 @@ class Window(Container):
         """
 
         def preferred_content_width() -> Optional[int]:
-            """ Content width: is only calculated if no exact width for the
-            window was given. """
+            """Content width: is only calculated if no exact width for the
+            window was given."""
             if self.ignore_content_width():
                 return None
 
@@ -1602,8 +1595,8 @@ class Window(Container):
         """
 
         def preferred_content_height() -> Optional[int]:
-            """ Content height: is only calculated if no exact height for the
-            window was given. """
+            """Content height: is only calculated if no exact height for the
+            window was given."""
             if self.ignore_content_height():
                 return None
 
@@ -1684,7 +1677,7 @@ class Window(Container):
         return self._ui_content_cache.get(key, get_content)
 
     def _get_digraph_char(self) -> Optional[str]:
-        " Return `False`, or the Digraph symbol to be used. "
+        "Return `False`, or the Digraph symbol to be used."
         app = get_app()
         if app.quoted_insert:
             return "^"
@@ -1801,8 +1794,8 @@ class Window(Container):
 
         # Set mouse handlers.
         def mouse_handler(mouse_event: MouseEvent) -> None:
-            """ Wrapper around the mouse_handler of the `UIControl` that turns
-            screen coordinates into line coordinates. """
+            """Wrapper around the mouse_handler of the `UIControl` that turns
+            screen coordinates into line coordinates."""
             # Don't handle mouse events outside of the current modal part of
             # the UI.
             if self not in get_app().layout.walk_through_modal_area():
@@ -1862,7 +1855,7 @@ class Window(Container):
         move_x = 0
 
         def render_margin(m: Margin, width: int) -> UIContent:
-            " Render margin. Return `Screen`. "
+            "Render margin. Return `Screen`."
             # Retrieve margin fragments.
             fragments = m.create_margin(render_info, width, write_position.height)
 
@@ -2080,7 +2073,7 @@ class Window(Container):
         copy()
 
         def cursor_pos_to_screen_pos(row: int, col: int) -> Point:
-            " Translate row/col from UIContent to real Screen coordinates. "
+            "Translate row/col from UIContent to real Screen coordinates."
             try:
                 y, x = rowcol_to_yx[row, col]
             except KeyError:
@@ -2164,7 +2157,6 @@ class Window(Container):
     def _apply_style(
         self, new_screen: Screen, write_position: WritePosition, parent_style: str
     ) -> None:
-
         # Apply `self.style`.
         style = parent_style + " " + to_str(self.style)
 
@@ -2444,7 +2436,7 @@ class Window(Container):
             window_size: int,
             content_size: int,
         ) -> int:
-            " Scrolling algorithm. Used for both horizontal and vertical scrolling. "
+            "Scrolling algorithm. Used for both horizontal and vertical scrolling."
             # Calculate the scroll offset to apply.
             # This can obviously never be more than have the screen size. Also, when the
             # cursor appears at the top or bottom, we don't apply the offset.
@@ -2528,7 +2520,7 @@ class Window(Container):
             self._scroll_up()
 
     def _scroll_down(self) -> None:
-        " Scroll window down. "
+        "Scroll window down."
         info = self.render_info
 
         if info is None:
@@ -2541,7 +2533,7 @@ class Window(Container):
             self.vertical_scroll += 1
 
     def _scroll_up(self) -> None:
-        " Scroll window up. "
+        "Scroll window up."
         info = self.render_info
 
         if info is None:

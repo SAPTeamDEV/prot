@@ -55,7 +55,7 @@ class Dimension:
         if min is None:
             min = 0  # Smallest possible value.
         if max is None:  # 0-values are allowed, so use "is None"
-            max = 1000 ** 10  # Something huge.
+            max = 1000**10  # Something huge.
         if preferred is None:
             preferred = min
         if weight is None:
@@ -94,7 +94,7 @@ class Dimension:
         return cls.exact(amount=0)
 
     def is_zero(self) -> bool:
-        " True if this `Dimension` represents a zero size. "
+        "True if this `Dimension` represents a zero size."
         return self.preferred == 0 or self.max == 0
 
     def __repr__(self) -> str:

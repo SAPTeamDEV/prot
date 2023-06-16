@@ -44,7 +44,6 @@ class Completion:
         style: str = "",
         selected_style: str = "",
     ) -> None:
-
         from prot.prompt.formatted_text import to_formatted_text
 
         self.text = text
@@ -91,21 +90,21 @@ class Completion:
 
     @property
     def display_text(self) -> str:
-        " The 'display' field as plain text. "
+        "The 'display' field as plain text."
         from prot.prompt.formatted_text import fragment_list_to_text
 
         return fragment_list_to_text(self.display)
 
     @property
     def display_meta(self) -> StyleAndTextTuples:
-        " Return meta-text. (This is lazy when using a callable). "
+        "Return meta-text. (This is lazy when using a callable)."
         from prot.prompt.formatted_text import to_formatted_text
 
         return to_formatted_text(self._display_meta or "")
 
     @property
     def display_meta_text(self) -> str:
-        " The 'meta' field as plain text. "
+        "The 'meta' field as plain text."
         from prot.prompt.formatted_text import fragment_list_to_text
 
         return fragment_list_to_text(self.display_meta)
@@ -294,7 +293,6 @@ class _MergedCompleter(Completer):
     async def get_completions_async(
         self, document: Document, complete_event: CompleteEvent
     ) -> AsyncGenerator[Completion, None]:
-
         # Get all completions from the other completers in a blocking way.
         for completer in self.completers:
             async for item in completer.get_completions_async(document, complete_event):
@@ -314,6 +312,7 @@ def get_common_complete_suffix(
     """
     Return the common prefix for all completions.
     """
+
     # Take only completions that don't change the text before the cursor.
     def doesnt_change_before_cursor(completion: Completion) -> bool:
         end = completion.text[: -completion.start_position]
