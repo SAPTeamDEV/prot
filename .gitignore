@@ -115,3 +115,6 @@ mypy/
 
 # IDE
 .vscode/
+
+# Runtime artifacts
+src/prot/settings
