@@ -23,6 +23,14 @@ prot = 'prot:prot'
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.3"
+commitizen = "^3.3.0"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_type = "semver"
+version_provider = "poetry"
+major_version_zero = false
 
 [build-system]
 requires = ["poetry-core"]
