@@ -15,7 +15,7 @@ try:
 except:
     _pf = None
 try:
-    from . import color as _c
+    import colorama as _c
 
     Fore = _c.ansi.Fore
     Back = _c.ansi.Back
