@@ -1,8 +1,8 @@
 Prot - Pro Tools for Python 3
 
-![PyPI](https://img.shields.io/pypi/v/prot)
+[![PyPI](https://img.shields.io/pypi/v/prot)](https://pypi.org/project/prot)
 [![Downloads](https://static.pepy.tech/badge/prot)](https://pepy.tech/project/prot)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/prot)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/prot)](https://pypi.org/project/prot)
 
 > Note: this readme is not updated and does not reflect the latest applied patches. A huge update is under the way!
 
