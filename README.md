@@ -2,6 +2,8 @@ Prot - Pro Tools for Python 3
 
 [![Downloads](https://static.pepy.tech/badge/prot)](https://pepy.tech/project/prot)
 
+> Note: this readme is not updated and does not reflect the latest applied patches. A huge update is under the way!
+
 Modules
 -------
 
