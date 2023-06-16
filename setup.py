@@ -1,19 +1,11 @@
-import sys, prot
+import sys
 from setuptools import setup, find_packages
 
 exec(open("src/prot/__version__.py").read())
-ver = prot.VersionString(__version__)
-if "!upgrade" in sys.argv:
-    sys.argv.remove("!upgrade")
-    ver = ver.upgrade()
-    f = open("src/prot/__version__.py", "w")
-    f.write("__version__ = " + repr(ver))
-    f.flush()
-    f.close()
 
 setup(
     name="prot",
-    version=ver,
+    version=__version__,
     description="A Simple Tool That Contains Advance Functions.",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
