@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "prot"
-version = "3.10.1"
+version = "3.10.2"
 description = "A Simple Tool That Contains Advance Functions."
 authors = ["Aeliux <itsaeliux@gmail.com>"]
 readme = "README.md"
