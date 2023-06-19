@@ -12,7 +12,7 @@ from time import sleep as _sleep
 
 try:
     from docutils.core import publish_file as _pf
-except:
+except Exception:
     _pf = None
 try:
     import colorama as _c
@@ -24,7 +24,7 @@ try:
     clear_screen = _c.ansi.clear_screen
     outWin32 = _c.ansitowin32.AnsiToWin32(_sys.stdout, convert=True)
     _c = True
-except:
+except Exception:
     _c = False
 
 __all__ = ["status"]
@@ -33,7 +33,7 @@ try:
     from . import __version__ as _ver
 
     __version__ = _ver.__version__
-except:
+except Exception:
     pass
 
 if hasattr(_sys, "runningPPF"):
@@ -53,7 +53,7 @@ if _os.path.split(_os.path.split(__file__)[0])[1] in ["lightprot", "protbuilder"
     try:
         _prt = __import__("prot")
         status.append("haveProt")
-    except:
+    except Exception:
         _prt = None
 
 Empty = "empty"
@@ -252,7 +252,7 @@ def callMethods(obj):
     for s in dir(obj):
         try:
             printMsg("result of " + s + "() is " + str(getattr(obj, s)()))
-        except:
+        except Exception:
             printMsg("error in " + str(s) + "()")
 
 
@@ -263,7 +263,7 @@ def callMethodsWithArg(obj, arg):
             printMsg(
                 "result of " + s + "(" + str(arg) + ") is " + str(getattr(obj, s)(arg))
             )
-        except:
+        except Exception:
             printMsg("error in " + str(s) + "(" + str(arg) + ")")
 
 
@@ -284,7 +284,7 @@ def checkFileSame(f1, f2):
             f.close()
             md5s[i] = md5s[i].hexdigest()
         return md5s[0] == md5s[1]
-    except:
+    except Exception:
         return False
 
 
@@ -301,7 +301,7 @@ def splitStr(string, length):
                 out.append(string)
         else:
             out = [string]
-    except:
+    except Exception:
         out = []
     return out
 
@@ -313,7 +313,7 @@ def compileStr(string):
             out = float(string)
         else:
             out = int(string)
-    except:
+    except Exception:
         if string in ["True", "False", "None"]:
             out = True if string == "True" else False if string == "False" else None
         else:
@@ -394,7 +394,7 @@ def printMsg(msg="", color=None, end="\n", file=None, colorize=True, prefix=True
     try:
         if "light" in status and "haveProt" in status and _prt is not None:
             settings.colorize = _prt.settings.colorize
-    except:
+    except Exception:
         pass
     if settings.colorize == "off" or not _sys.stdout == _sys.__stdout__:
         _c = False
@@ -423,7 +423,7 @@ def printMsg(msg="", color=None, end="\n", file=None, colorize=True, prefix=True
     out.write(msg + end)
     try:
         out.flush()
-    except:
+    except Exception:
         pass
 
 
@@ -443,7 +443,7 @@ def getLocalIP():
     try:
         sock.connect(("10.255.255.255", 1))
         ip = sock.getsockname()[0]
-    except:
+    except Exception:
         ip = "127.0.0.1"
     finally:
         sock.close()
@@ -458,7 +458,7 @@ def checkAvail(address, timeout=0.5):
         sock.connect(address)
         sock.close()
         return True
-    except:
+    except Exception:
         return False
 
 
@@ -522,7 +522,7 @@ class Matrix(list):
         try:
             if value:
                 self._checkValue(value)
-        except:
+        except Exception:
             for v in value:
                 self._checkValue(v)
         list.__init__(self, value)
@@ -545,7 +545,7 @@ class Matrix(list):
             try:
                 if k[0] == key:
                     self.remove(k)
-            except:
+            except Exception:
                 pass
 
     def get(self, key, default=None):
@@ -553,7 +553,7 @@ class Matrix(list):
             try:
                 if k[0] == key:
                     return k[1]
-            except:
+            except Exception:
                 pass
         return default
 
@@ -578,7 +578,7 @@ def rst2html(path, subdirs=False):
                     destination_path=path.split(".rst")[0] + ".html",
                     writer_name="html",
                 )
-            except:
+            except Exception:
                 import traceback
 
                 traceback.print_stack()
@@ -649,7 +649,7 @@ class LoopBack(object):
     def __getattribute__(self, key):
         try:
             return object.__getattribute__(self, key)
-        except:
+        except Exception:
             return self._back
 
 
@@ -659,7 +659,7 @@ class Database(object):
     def __getattribute__(self, val):
         try:
             return object.__getattribute__(self, val)
-        except:
+        except Exception:
             return self.dict[val]
 
     def __setattr__(self, key, val):
@@ -677,7 +677,7 @@ class Database(object):
     def __delattr__(self, val):
         try:
             del self.dict[val]
-        except:
+        except Exception:
             object.__delattr__(self, val)
 
     def __getitem__(self, val):
@@ -744,7 +744,7 @@ class OptionsDatabase(Database):
                             self.dict[o["key"]] = update[i]
                         else:
                             self.dict[o["key"]] = update[o["position"]]
-                    except:
+                    except Exception:
                         raise Exception(f"argument '{o['key']}' is required.")
                 if not o["key"] in self.dict:
                     if o.get("required", False):
@@ -836,7 +836,7 @@ class TextDictFile(object):
                         v = float(v)
                     else:
                         v = int(v)
-                except:
+                except Exception:
                     if v in ["True", "False", "None"]:
                         v = True if v == "True" else False if v == "False" else None
                     else:
@@ -1577,7 +1577,7 @@ class Progress(object):
         else:
             try:
                 del self.tempMsg
-            except:
+            except Exception:
                 pass
             return cf
 
@@ -1641,17 +1641,17 @@ class VersionString(str):
             ver = self.split(".")
             try:
                 self.major = int(ver[0])
-            except:
+            except Exception:
                 self.major = None
             try:
                 self.minor = int(ver[1])
-            except:
+            except Exception:
                 self.minor = None
             try:
                 self.micro = int(ver[2])
-            except:
+            except Exception:
                 self.micro = None
-        except:
+        except Exception:
             pass
 
     def upgrade(self, target="default", maxMinor=9, maxMicro=9):
@@ -1713,7 +1713,7 @@ class ProtString(str):
                 out = float(self)
             else:
                 out = int(self)
-        except:
+        except Exception:
             if self in ["True", "False", "None"]:
                 out = True if self == "True" else False if self == "False" else None
             else:
@@ -1784,6 +1784,6 @@ class ProtString(str):
                     out.append(tStr)
             else:
                 out = [self]
-        except:
+        except Exception:
             out = []
         return out

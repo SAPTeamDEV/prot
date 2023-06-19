@@ -2,7 +2,7 @@ import sys
 
 try:
     from .packagesList import packagesList as _p
-except:
+except Exception:
     _p = []
 import os
 import runpy as _r
@@ -11,7 +11,7 @@ from .. import *
 
 try:
     import xmlrpc.client as xmlrpclib
-except:
+except Exception:
     xmlrpclib = None
 
 __version__ = str(len(_p))
@@ -76,7 +76,7 @@ def updateBuiltinList(export=False, pList=False, fList="txt"):
         else:
             client = xmlrpclib.ServerProxy("https://pypi.python.org/pypi")
             pl = client.list_packages()
-    except:
+    except Exception:
         printErr(
             "update failed." if not export else "error occured while getting list."
         )
@@ -312,7 +312,7 @@ def main(action, **values):
                             (" " + options.extraArgs) if options.extraArgs else "",
                         )
                     )
-            except:
+            except Exception:
                 pass
             if options.smart:
                 options.cfgList.append(value)
@@ -346,7 +346,7 @@ def main(action, **values):
         else:
             try:
                 runAsMain("pip " + action + " " + options.value)
-            except:
+            except Exception:
                 pass
         if options.export:
             f = open(options.export, "w")

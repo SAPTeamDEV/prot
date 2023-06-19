@@ -20,16 +20,16 @@ if __name__ == "__main__" and not exit:
             if ea in ["test", "t"]:
                 try:
                     c = int(sys.argv[3])
-                except:
+                except Exception:
                     c = 1000
                 testSpeed(c)
             elif ea in ["wait", "w"]:
                 try:
                     c = float(sys.argv[3])
-                except:
+                except Exception:
                     try:
                         c = str(sys.argv[3])
-                    except:
+                    except Exception:
                         c = 1.0
                 Timer(c, None, False, "foreground")
             else:
@@ -48,7 +48,7 @@ if __name__ == "__main__" and not exit:
                 try:
                     if getattr(settings, sys.argv[2]) == sys.argv[3]:
                         printMsg(sys.argv[2] + " : " + sys.argv[3])
-                except:
+                except Exception:
                     pass
             else:
                 printErr("argument is invalid.")
@@ -57,13 +57,13 @@ if __name__ == "__main__" and not exit:
             func = sys.argv[2]
             try:
                 args = sys.argv[3:]
-            except:
+            except Exception:
                 args = []
             cargs = []
             for a in args:
                 try:
                     integer = int(a)
-                except:
+                except Exception:
                     integer = None
                 if a.startswith("!"):
                     try:
@@ -79,10 +79,10 @@ if __name__ == "__main__" and not exit:
                                 narg = []
                         else:
                             narg = []
-                    except:
+                    except Exception:
                         try:
                             integer = int(a[1:])
-                        except:
+                        except Exception:
                             integer = None
                         if integer:
                             narg = integer
@@ -120,11 +120,11 @@ if __name__ == "__main__" and not exit:
                     printMsg("new version found, Installing prot v" + insver)
                     try:
                         runAsMain("pip -q install --upgrade prot==" + insver)
-                    except:
+                    except Exception:
                         pass
                 else:
                     printMsg("latest version already installed")
-            except:
+            except Exception:
                 printErr("update failed.")
         else:
             printErr("argument is invalid.")
