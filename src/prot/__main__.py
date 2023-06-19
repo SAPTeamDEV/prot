@@ -2,8 +2,9 @@ import sys
 
 import prot
 
-from . import *
+from . import ProtString, Timer
 from . import __version__ as version
+from . import list2str, printErr, printMsg, runAsMain, settings, status, testSpeed
 
 exit = False
 if "light" in status:

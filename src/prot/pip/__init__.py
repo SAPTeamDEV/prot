@@ -1,13 +1,26 @@
 import sys
 
+from .. import (
+    BarWidget,
+    OptionsDatabase,
+    Progress,
+    Settings,
+    TimeWidget,
+    ValueWidget,
+    getVarFromFile,
+    list2str,
+    printErr,
+    printMsg,
+    runAsMain,
+    settings,
+)
+
 try:
     from .packagesList import packagesList as _p
 except Exception:
     _p = []
 import os
 import runpy as _r
-
-from .. import *
 
 try:
     import xmlrpc.client as xmlrpclib
@@ -84,7 +97,7 @@ def updateBuiltinList(export=False, pList=False, fList="txt"):
     if len(pl) <= len(_p) and not export:
         printMsg("built in list already updated.")
         return
-    if settings.orderedBuiltinList == "on":
+    if Settings.orderedBuiltinList == "on":
         pl.sort()
     try:
         if export:
