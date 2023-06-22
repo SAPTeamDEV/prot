@@ -1,3 +1,9 @@
+## v3.10.3 (2023-06-22)
+
+### Fix
+
+- add docutils as dependency
+
 ## v3.10.2 (2023-06-17)
 
 ### Fix
