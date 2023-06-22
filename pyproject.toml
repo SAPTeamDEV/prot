@@ -16,6 +16,7 @@ packages = [{include = "prot", from = "src"}]
 [tool.poetry.dependencies]
 python = "^3.8.1"
 colorama = "^0.4.6"
+docutils = "^0.20.1"
 
 [tool.poetry.scripts]
 prot = 'prot:prot'
