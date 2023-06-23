@@ -9,6 +9,7 @@ homepage = "https://github.com/SAPTeamDEV/prot"
 keywords = ["tool", "tools", "protools", "ptools", "colorize"]
 classifiers=[
   "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3.8", # fix poetry bug
   "Topic :: Software Development :: Libraries",
 ]
 packages = [{include = "prot", from = "src"}]
