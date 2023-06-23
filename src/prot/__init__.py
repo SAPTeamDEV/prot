@@ -8,24 +8,17 @@ import socket as _socket
 import sys as _sys
 import threading as _threading
 import time as _time
-from time import sleep as _sleep
 
-try:
-    from docutils.core import publish_file as _pf
-except Exception:
-    _pf = None
-try:
-    import colorama as _c
+import colorama
+from docutils.core import publish_file
 
-    Fore = _c.ansi.Fore
-    Back = _c.ansi.Back
-    Style = _c.ansi.Style
-    clear_line = _c.ansi.clear_line
-    clear_screen = _c.ansi.clear_screen
-    outWin32 = _c.ansitowin32.AnsiToWin32(_sys.stdout, convert=True)
-    _c = True
-except Exception:
-    _c = False
+Fore = colorama.ansi.Fore
+Back = colorama.ansi.Back
+Style = colorama.ansi.Style
+clear_line = colorama.ansi.clear_line
+clear_screen = colorama.ansi.clear_screen
+outWin32 = colorama.ansitowin32.AnsiToWin32(_sys.stdout, convert=True)
+_c = True
 
 __all__ = ["status"]
 
@@ -560,9 +553,6 @@ class Matrix(list):
 
 @appendAll
 def rst2html(path, subdirs=False):
-    if _pf is None:
-        printErr("docutils package needed.")
-        return
     if _os.path.isdir(path):
         for p in _os.listdir(path):
             if _os.path.isdir(path + "/" + p):
@@ -573,7 +563,7 @@ def rst2html(path, subdirs=False):
     if _os.path.exists(path):
         if path.endswith(".rst"):
             try:
-                _pf(
+                publish_file(
                     source_path=path,
                     destination_path=path.split(".rst")[0] + ".html",
                     writer_name="html",
