@@ -21,11 +21,7 @@ except Exception:
     _p = []
 import os
 import runpy as _r
-
-try:
-    import xmlrpc.client as xmlrpclib
-except Exception:
-    xmlrpclib = None
+import xmlrpc.client as xmlrpclib
 
 __version__ = str(len(_p))
 DEFAULT_REPOSITORY = "Pypi"
