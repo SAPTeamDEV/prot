@@ -1,7 +1,7 @@
 import sys
 
-from .. import *
-from . import *
+from .. import status
+from . import main, printErr, updateBuiltinList
 
 exit = False
 if "light" in status:

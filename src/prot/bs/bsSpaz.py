@@ -1,9 +1,6 @@
-import os
-import shutil
+from typing import Dict
 
-from . import *
-
-appearances = {}
+from . import Database, ProtString, bs
 
 
 class Appearance(Database):
@@ -13,6 +10,9 @@ class Appearance(Database):
             appearances[name] = self
         else:
             raise Exception(repr(name) + "already exists.")
+
+
+appearances: Dict[str, Appearance] = {}
 
 
 def clear():

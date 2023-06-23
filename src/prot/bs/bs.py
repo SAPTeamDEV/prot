@@ -3,10 +3,11 @@ import os
 import shutil
 from base64 import b64encode
 from functools import partial
+from typing import Dict
 
-from . import *
+from . import LoopBack, bs, printWarn
 
-treeCache = {}
+treeCache: Dict[str, str] = {}
 
 
 def getModel(file):
@@ -39,7 +40,7 @@ class Factory(object):
 
     def __getattribute__(self, key):
         if key in ["dict", "getcontents"] or key.startswith("_"):
-            return object.__getattribute__(self, key, value)
+            return object.__getattribute__(self, key)
         if not hasattr(self, "dict"):
             self.dict = {}
         return self.dict[key]

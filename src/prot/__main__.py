@@ -26,13 +26,13 @@ if __name__ == "__main__" and not exit:
                 testSpeed(c)
             elif ea in ["wait", "w"]:
                 try:
-                    c = float(sys.argv[3])
+                    t: float | str = float(sys.argv[3])
                 except Exception:
                     try:
-                        c = str(sys.argv[3])
+                        t = str(sys.argv[3])
                     except Exception:
-                        c = 1.0
-                Timer(c, None, False, "foreground")
+                        t = 1.0
+                Timer(t, None, False, "foreground")
             else:
                 printErr("argument is invalid.")
             break
@@ -65,7 +65,7 @@ if __name__ == "__main__" and not exit:
                 try:
                     integer = int(a)
                 except Exception:
-                    integer = None
+                    integer = 0
                 if a.startswith("!"):
                     try:
                         data = ProtString(a[1:]).extract()
@@ -84,7 +84,7 @@ if __name__ == "__main__" and not exit:
                         try:
                             integer = int(a[1:])
                         except Exception:
-                            integer = None
+                            integer = 0
                         if integer:
                             narg = integer
                         else:

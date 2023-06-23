@@ -1,9 +1,7 @@
 import builtins as _builtins
+from typing import Dict, List
 
-from . import *
-
-maps = {}
-depends = []
+from . import ProtString, bs
 
 
 class Map(object):
@@ -24,6 +22,10 @@ class Map(object):
         class attributes on itself.
         """
         return None
+
+
+maps: Dict[str, Map] = {}
+depends: List[str] = []
 
 
 def registerMap(map):
