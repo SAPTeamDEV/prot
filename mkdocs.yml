@@ -1,0 +1,8 @@
+site_name: Prot
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings
