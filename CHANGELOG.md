@@ -1,3 +1,9 @@
+## v3.10.5 (2023-06-28)
+
+### Fix
+
+- fix a typo in updateBuiltinList
+
 ## v3.10.4 (2023-06-23)
 
 ### Fix
