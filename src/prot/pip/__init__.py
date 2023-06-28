@@ -63,7 +63,9 @@ def convertUpdatePackage(iFile=None, oFile=None, ofFile="txt"):
     printMsg("converted " + iFile + " to " + oFile + ".")
 
 
-def updateBuiltinList(export=False, pList=False, fList="txt"):
+def updateBuiltinList(
+    export: str | bool = False, pList: str | bool = False, fList="txt"
+):
     if export and pList:
         convertUpdatePackage(pList, export, fList)
         return
@@ -93,7 +95,7 @@ def updateBuiltinList(export=False, pList=False, fList="txt"):
     if len(pl) <= len(_p) and not export:
         printMsg("built in list already updated.")
         return
-    if Settings.orderedBuiltinList == "on":
+    if settings.orderedBuiltinList == "on":
         pl.sort()
     try:
         if export:
