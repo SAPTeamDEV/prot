@@ -8,6 +8,7 @@ import socket as _socket
 import sys as _sys
 import threading as _threading
 import time as _time
+from typing import Dict
 
 import colorama
 from docutils.core import publish_file
@@ -47,7 +48,7 @@ if _os.path.split(_os.path.split(__file__)[0])[1] in ["lightprot", "protbuilder"
         _prt = __import__("prot")
         status.append("haveProt")
     except Exception:
-        _prt = None
+        pass
 
 Empty = "empty"
 
@@ -127,7 +128,7 @@ settingChoices = {
     "printMsgColor": [color for color in colors["foreground"]],
 }
 
-settingData = None
+settingData: Dict[str, str] | None = None
 
 
 def prot(args=None):
@@ -265,6 +266,7 @@ def callMethodsWithArg(obj, arg):
 def checkFileSame(f1, f2):
     try:
         md5s = [_hashlib.md5(), _hashlib.md5()]
+        results = []
         fs = [f1, f2]
         for i in range(2):
             f = open(fs[i], "rb")
@@ -275,8 +277,8 @@ def checkFileSame(f1, f2):
                     break
                 md5s[i].update(data)
             f.close()
-            md5s[i] = md5s[i].hexdigest()
-        return md5s[0] == md5s[1]
+            results[i] = md5s[i].hexdigest()
+        return results[0] == results[1]
     except Exception:
         return False
 
@@ -385,7 +387,7 @@ def runAsMain(args=None):
 def printMsg(msg="", color=None, end="\n", file=None, colorize=True, prefix=True):
     global _c
     try:
-        if "light" in status and "haveProt" in status and _prt is not None:
+        if "light" in status and "haveProt" in status:
             settings.colorize = _prt.settings.colorize
     except Exception:
         pass

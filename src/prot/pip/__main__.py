@@ -9,15 +9,15 @@ if "light" in status:
     exit = True
 
 if __name__ == "__main__" and not exit:
-    localRepo = False
+    localRepo: str | bool = False
     action = None
     value = None
-    pList = False
-    iList = False
-    eList = False
+    pList: str | bool = False
+    iList: str | bool = False
+    eList: str | bool = False
     fList = "txt"
-    smart = False
-    export = False
+    smart: str | bool = False
+    export: str | bool = False
     for a in sys.argv[1:]:
         if action == "update" and ("--export" in a or "-e" in a):
             if ":" in a:
